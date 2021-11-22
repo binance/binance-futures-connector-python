@@ -16,7 +16,7 @@ This is a lightweight library that works as a connector to [Binance Futures publ
 ## Installation
 
 ```bash
-pip install binance-connector
+pip install binance-futures-connector
 ```
 
 ## RESTful APIs
