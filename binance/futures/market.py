@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/Users/andreachang/downloads/binance-futures-connector-python-3')
 from binance.lib.utils import (
     check_required_parameter,
 )
@@ -5,13 +7,14 @@ from binance.lib.utils import check_required_parameters
 
 
 def ping(self):
-    """Test Connectivity
-    Test connectivity to the Rest API.
+    """
+    |
+    | **Test Connectivity**
+    | *Test connectivity to the Rest API.*
 
-    GET /fapi/v1/ping
-
-    https://binance-docs.github.io/apidocs/futures/en/#test-connectivity
-
+    :API endpoint: ``GET /fapi/v1/ping``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#test-connectivity
+    |
     """
 
     url_path = "/fapi/v1/ping"
@@ -19,13 +22,14 @@ def ping(self):
 
 
 def time(self):
-    """Check Server Time
-    Test connectivity to the Rest API and get the current server time.
+    """
+    |
+    | **Check Server Time**
+    | *Test connectivity to the Rest API and get the current server time.*
 
-    GET /fapi/v1/time
-
-    https://binance-docs.github.io/apidocs/futures/en/#check-server-time
-
+    :API endpoint: ``GET /fapi/v1/time``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#check-server-time
+    |
     """
 
     url_path = "/fapi/v1/time"
@@ -33,13 +37,14 @@ def time(self):
 
 
 def exchange_info(self):
-    """Exchange Information
-    Current exchange trading rules and symbol information
+    """
+    |
+    | **Exchange Information**
+    | *Current exchange trading rules and symbol information.*
 
-    GET /fapi/v1/exchangeInfo
-
-    https://binance-docs.github.io/apidocs/futures/en/#exchange-information
-
+    :API endpoint: ``GET /fapi/v1/exchangeInfo``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#exchange-information
+    |
     """
 
     url_path = "/fapi/v1/exchangeInfo"
@@ -47,16 +52,16 @@ def exchange_info(self):
 
 
 def depth(self, symbol: str, **kwargs):
-    """Get orderbook
+    """
+    |
+    | **Get Orderbook**
 
-    GET /fapi/v1/depth
+    :API endpoint: ``GET /fapi/v1/depth``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#order-book
 
-    https://binance-docs.github.io/apidocs/futures/en/#order-book
-
-    Args:
-        symbol (str): the trading symbol
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; valid limits:[5, 10, 20, 50, 100, 500, 1000]
+    :parameter symbol: string; the trading symbol.
+    :parameter limit: optional int; limit the results. Default 500, valid limits: [5, 10, 20, 50, 100, 500, 1000].
+    |
     """
 
     check_required_parameter(symbol, "symbol")
@@ -65,56 +70,58 @@ def depth(self, symbol: str, **kwargs):
 
 
 def trades(self, symbol: str, **kwargs):
-    """Get recent market trades
-
-    GET /fapi/v1/trades
-
-    https://binance-docs.github.io/apidocs/futures/en/#recent-trades-list
-
-    Args:
-        symbol (str): the trading symbol
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000
     """
+    |
+    | **Get Recent Market Trades**
+
+    :API endpoint: ``GET /fapi/v1/trades``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#recent-trades-list
+
+    :parameter symbol: string; the trading symbol.
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    |
+    """
+
     check_required_parameter(symbol, "symbol")
     params = {"symbol": symbol, **kwargs}
     return self.query("/fapi/v1/trades", params)
 
 
 def historical_trades(self, symbol: str, **kwargs):
-    """Old Trade Lookup
-    Get older market historical trades.
-
-    GET /fapi/v1/historicalTrades
-
-    https://binance-docs.github.io/apidocs/futures/en/#old-trades-lookup-market_data
-
-    Args:
-        symbol (str): the trading symbol
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        formId (int, optional): trade id to fetch from. Default gets most recent trades.
     """
+    |
+    | **Old Trade Lookup**
+    | *Get older market historical trades.*
+
+    :API endpoint: ``GET /fapi/v1/historicalTrades``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#old-trades-lookup-market_data
+
+    :parameter symbol: string; the trading symbol.
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter formId: optional int; trade ID to fetch from. Default gets most recent trades.
+    |
+    """
+
     check_required_parameter(symbol, "symbol")
     params = {"symbol": symbol, **kwargs}
     return self.limit_request("GET", "/fapi/v1/historicalTrades", params)
 
 
 def agg_trades(self, symbol: str, **kwargs):
-    """Compressed/Aggregate Trades List
-    Get compressed, aggregate market trades. Market trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+    """
+    |
+    | **Compressed/Aggregate Trades List**
+    | *Get compressed, aggregate market trades. Market trades that fill at the time, from the same order, with the same price will have the quantity aggregated.*
     
-    GET /fapi/v1/aggTrades
+    :API endpoint: ``GET /fapi/v1/aggTrades``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#compressed-aggregate-trades-list
 
-    https://binance-docs.github.io/apidocs/futures/en/#compressed-aggregate-trades-list
-
-    Args:
-        symbol (str): the trading symbol
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        formId (int, optional): id to get aggregate trades from INCLUSIVE.
-        startTime (int, optional): Timestamp in ms to get aggregate trades from INCLUSIVE.
-        endTime (int, optional): Timestamp in ms to get aggregate trades until INCLUSIVE.
+    :parameter symbol: string; the trading symbol.
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter formId: optional int; ID to get aggregate trades from INCLUSIVE.
+    :parameter startTime: optional int; timestamp in ms to get aggregate trades from INCLUSIVE.
+    :parameter endTime: optional int; timestamp in ms to get aggregate trades from INCLUSIVE.
+    |
     """
 
     check_required_parameter(symbol, "symbol")
@@ -123,107 +130,104 @@ def agg_trades(self, symbol: str, **kwargs):
 
 
 def klines(self, symbol: str, interval: str, **kwargs):
-    """Kline/Candlestick Data
-    Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
-
-    GET /fapi/v1/klines
-
-    https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-data
-
-    Args:
-        symbol (str): the trading symbol
-        interval (str): the interval of kline, e.g 1m, 5m, 1h, 1d, etc.
-        (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
     """
-    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
+    |
+    | **Kline/Candlestick Data**
+    | *Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.*
 
+    :API endpoint: ``GET /fapi/v1/klines``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-data
+
+    :parameter symbol: string; the trading symbol.
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
     params = {"symbol": symbol, "interval": interval, **kwargs}
     return self.query("/fapi/v1/klines", params)
 
 
 def continuous_klines(self, pair: str, contractType: str, interval: str, **kwargs):
-    """Continuous Kline/Candlestick Data
-    Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.  
-    
-    GET /fapi/v1/continuousKlines
-
-    https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-data
-
-    Args:
-        pair (str): the trading pair
-        contractType: PERPETUAL, CURRENT_MONTH, NEXT_MONTH, CURRENT_QUARTER, NEXT_QUARTER 
-        interval (str): the interval of kline, e.g 1m, 5m, 1h, 1d, etc.
-        (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
     """
-    check_required_parameters([[pair, "pair"], [contractType,"contractType"], [interval, "interval"]])
+    |
+    | **Continuous Kline/Candlestick Data**
+    | *Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.*  
+    
+    :API endpoint: ``GET /fapi/v1/continuousKlines``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-data
 
+    :parameter pair: string; the trading pair.
+    :parameter contractType: string; PERPETUAL, CURRENT_MONTH, NEXT_MONTH, CURRENT_QUARTER, NEXT_QUARTER.
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+    |
+    """
+
+    check_required_parameters([[pair, "pair"], [contractType,"contractType"], [interval, "interval"]])
     params = {"pair": pair, "contractType":contractType, "interval": interval, **kwargs}
     return self.query("/fapi/v1/continuousKlines", params)
 
 
 def index_price_klines(self, pair: str, interval: str, **kwargs):
-    """Kline/Candlestick Data for the index price of a pair.
-    Klines are uniquely identified by their open time.    
-    
-    GET /fapi/v1/indexPriceKlines
-
-    https://binance-docs.github.io/apidocs/futures/en/#index-price-kline-candlestick-data
-
-    Args:
-        pair (str): the trading pair
-        interval (str): the interval of kline, e.g 1m, 5m, 1h, 1d, etc.
-        (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
     """
-    check_required_parameters([[pair, "pair"], [interval, "interval"]])
+    |
+    | **Kline/Candlestick Data for the index price of a pair.**
+    | *Klines are uniquely identified by their open time.*   
+    
+    :API endpoint: ``GET /fapi/v1/indexPriceKlines``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#index-price-kline-candlestick-data
 
+    :parameter pair: string; the trading pair.
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+    |
+    """
+
+    check_required_parameters([[pair, "pair"], [interval, "interval"]])
     params = {"pair": pair, "interval": interval, **kwargs}
     return self.query("/fapi/v1/indexPriceKlines", params)
 
 
 def mark_price_klines(self, symbol: str, interval: str, **kwargs):
-    """Kline/candlestick bars for the mark price of a symbol.
-    Klines are uniquely identified by their open time.   
-    
-    GET /fapi/v1/markPriceKlines
-
-    https://binance-docs.github.io/apidocs/futures/en/#mark-price-kline-candlestick-data
-
-    Args:
-        symbol (str): the trading symbol
-        interval (str): the interval of kline, e.g 1m, 5m, 1h, 1d, etc.
-        (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
     """
-    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
+    |
+    | **Kline/candlestick bars for the mark price of a symbol.**
+    | *Klines are uniquely identified by their open time.*
+    
+    :API endpoint: ``GET /fapi/v1/markPriceKlines``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#mark-price-kline-candlestick-data
 
+    :parameter symbol: string; the trading symbol.
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
     params = {"symbol": symbol, "interval": interval, **kwargs}
     return self.query("/fapi/v1/markPriceKlines", params)
 
 
 def mark_price(self, symbol: str):
-    """Mark Price and Funding Rate
+    """
+    |
+    | **Mark Price and Funding Rate**
 
-    GET /fapi/v1/premiumIndex
+    :API endpoint: ``GET /fapi/v1/premiumIndex``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#mark-price
 
-    https://binance-docs.github.io/apidocs/futures/en/#mark-price
-
-    Args:
-        symbol (str): the trading symbol
+    :parameter symbol: string; the trading symbol.
+    |
     """
 
     check_required_parameter(symbol, "symbol")
@@ -234,22 +238,23 @@ def mark_price(self, symbol: str):
 
 
 def funding_rate(self, symbol: str,  **kwargs):
-    """funding Rate history
+    """
+    |
+    | **Funding Rate History
 
-    GET /fapi/v1/fundingRate
+    :API endpoint: ``GET /fapi/v1/fundingRate``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-funding-rate-history
 
-    https://binance-docs.github.io/apidocs/futures/en/#get-funding-rate-history
+    :parameter symbol: string; the trading symbol.
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
 
-    Args:
-        symbol (str, optional): the trading symbol
-    Keyword Args:
-        limit (int, optional): limit the results. Default 100; max 1000.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
-
-    If startTime and endTime are not sent, the most recent limit datas are returned.
-    If the number of data between startTime and endTime is larger than limit, return as startTime + limit.
-    In ascending order.
+    **Notes**
+        - If startTime and endTime are not sent, the most recent limit datas are returned.
+        - If the number of data between startTime and endTime is larger than limit, return as startTime + limit.
+        - In ascending order.
+    |
     """
     
     params = {"symbol": symbol, **kwargs}
@@ -257,15 +262,17 @@ def funding_rate(self, symbol: str,  **kwargs):
 
 
 def ticker_24hr_price_change(self, symbol: str = None):
-    """24 hour rolling window price change statistics. Careful when accessing this with no symbol.
-    If the symbol is not sent, tickers for all symbols will be returned in an array.
+    """
+    |
+    | **24 hour rolling window price change statistics.**
+    | *Careful when accessing this with no symbol.*
+    | *If the symbol is not sent, tickers for all symbols will be returned in an array.*
 
-    GET /fapi/v1/ticker/24hr
+    :API endpoint: ``GET /fapi/v1/ticker/24hr``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#24hr-ticker-price-change-statistics
 
-    https://binance-docs.github.io/apidocs/futures/en/#24hr-ticker-price-change-statistics
-
-    Args:
-        symbol (str, optional): the trading symbol
+    :parameter symbol: string; the trading symbol.
+    |
     """
 
     params = {
@@ -275,15 +282,18 @@ def ticker_24hr_price_change(self, symbol: str = None):
 
 
 def ticker_price(self, symbol: str = None):
-    """Latest price for a symbol or symbols.
+    """
+    |
+    | **Latest price for a symbol or symbols.**
 
-    GET /fapi/v1/ticker/price
+    :API endpoint: ``GET /fapi/v1/ticker/price``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#symbol-price-ticker
 
-    https://binance-docs.github.io/apidocs/futures/en/#symbol-price-ticker
+    :parameter symbol: optional string; the trading symbol.
 
-    Args:
-        symbol (str, optional): the trading symbol
-    If the symbol is not sent, prices for all symbols will be returned in an array.
+    **Notes**
+        - If the symbol is not sent, prices for all symbols will be returned in an array.
+    |
     """
 
     params = {
@@ -293,15 +303,18 @@ def ticker_price(self, symbol: str = None):
 
 
 def book_ticker(self, symbol: str = None):
-    """Best price/qty on the order book for a symbol or symbols.
+    """
+    |
+    | **Best price/qty on the order book for a symbol or symbols.**
 
-    GET /fapi/v1/ticker/bookTicker
+    :API endpoint: ``GET /fapi/v1/ticker/bookTicker``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#symbol-order-book-ticker
 
-    https://binance-docs.github.io/apidocs/futures/en/#symbol-order-book-ticker
-
-    Args:
-        symbol (str, optional): the trading symbol
-    If the symbol is not sent, bookTickers for all symbols will be returned in an array.
+    :parameter symbol: optional string; the trading symbol.
+    
+    **Notes**
+        - If the symbol is not sent, bookTickers for all symbols will be returned in an array.
+    |
     """
 
     params = {
@@ -311,14 +324,15 @@ def book_ticker(self, symbol: str = None):
 
 
 def open_interest(self, symbol: str):
-    """Get present open interest of a specific symbol.
+    """
+    |
+    | **Get present open interest of a specific symbol.**
 
-    GET /fapi/v1/openInterest
+    :API endpoint: ``GET /fapi/v1/openInterest``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#open-interest
 
-    https://binance-docs.github.io/apidocs/futures/en/#open-interest
-
-    Args:
-        symbol (str): the trading symbol
+    :parameter symbol: string; the trading symbol.
+    |
     """
 
     check_required_parameter(symbol, "symbol")
@@ -327,131 +341,142 @@ def open_interest(self, symbol: str):
 
 
 def open_interest_hist(self, symbol: str, period: str, **kwargs):
-    """Get historical open interest of a specific symbol.
-    
-    GET /futures/data/openInterestHist
-
-    https://binance-docs.github.io/apidocs/futures/en/#open-interest-statistics
-
-    Args:
-        symbol (str): the trading symbol
-        period (str): the period of open interest, "5m","15m","30m","1h","2h","4h","6h","12h","1d".
-    Keyword Args:
-        limit (int, optional): limit the results. Default 30; max 500.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
-    If startTime and endTime are not sent, the most recent data is returned.
-    Only the data of the latest 30 days is available.
     """
-    check_required_parameters([[symbol, "symbol"], [period, "period"]])
+    |
+    | **Get historical open interest of a specific symbol.**
+    
+    :API endpoint: ``GET /futures/data/openInterestHist``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#open-interest-statistics
 
+    :parameter symbol: string; the trading symbol.
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d".
+    :parameter limit: optional int; limit the results. Default 30, max 500.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+
+    **Notes**
+        - If startTime and endTime are not sent, the most recent data is returned.
+        - Only the data of the latest 30 days is available.
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [period, "period"]])
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/openInterestHist", params)
 
 
 def top_long_short_position_ratio(self, symbol: str, period: str, **kwargs):
-    """Get top long short position ratio.
-    
-    GET /futures/data/topLongShortPositionRatio
-
-    https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-positions
-
-    Args:
-        symbol (str): the trading symbol
-        period (str): "5m","15m","30m","1h","2h","4h","6h","12h","1d".
-        (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
-    Keyword Args:
-        limit (int, optional): limit the results. Default 30; max 500.
-        startTime (int, optional): Start Time.
-        endTime (int, optional): End Time.
-    If startTime and endTime are not sent, the most recent data is returned.
-    Only the data of the latest 30 days is available.
     """
-    check_required_parameters([[symbol, "symbol"], [period, "period"]])
+    |
+    | **Get top long short position ratio.**
+    
+    :API endpoint: ``GET /futures/data/topLongShortPositionRatio``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-positions
 
+    :parameter symbol: string; the trading symbol.
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 30, max 500.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+
+    **Notes**
+        - If startTime and endTime are not sent, the most recent data is returned.
+        - Only the data of the latest 30 days is available.
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [period, "period"]])
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/topLongShortPositionRatio", params)
 
 
 def long_short_account_ratio(self, symbol: str, period: str, **kwargs):
-    """Get top long short account ratio.
-    
-    GET /futures/data/globalLongShortAccountRatio
-
-    https://binance-docs.github.io/apidocs/futures/en/#long-short-ratio
-
-    Args:
-        symbol (str): the trading symbol
-        period (str): "5m","15m","30m","1h","2h","4h","6h","12h","1d".
-    Keyword Args:
-        limit (int, optional): limit the results. Default 30; max 500.
-        startTime (int, optional)
-        endTime (int, optional)
-    If startTime and endTime are not sent, the most recent data is returned.
-    Only the data of the latest 30 days is available.
     """
-    check_required_parameters([[symbol, "symbol"], [period, "period"]])
+    |
+    | **Get top long short account ratio.**
+    
+    :API endpoint: ``GET /futures/data/globalLongShortAccountRatio``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#long-short-ratio
 
+    :parameter symbol: string; the trading symbol.
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 30, max 500.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+
+    **Notes**
+        - If startTime and endTime are not sent, the most recent data is returned.
+        - Only the data of the latest 30 days is available.
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [period, "period"]])
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/globalLongShortAccountRatio", params)
 
 
 def taker_long_short_ratio(self, symbol: str, period: str, **kwargs):
-    """Get taker long short ratio.
-    
-    GET /futures/data/takerlongshortRatio
-
-    https://binance-docs.github.io/apidocs/futures/en/#taker-buy-sell-volume
-
-    Args:
-        symbol (str): the trading symbol
-        period (str): "5m","15m","30m","1h","2h","4h","6h","12h","1d".
-    Keyword Args:
-        limit (int, optional): limit the results. Default 30; max 500.
-        startTime (int, optional)
-        endTime (int, optional)
-    If startTime and endTime are not sent, the most recent data is returned.
-    Only the data of the latest 30 days is available.
     """
-    check_required_parameters([[symbol, "symbol"], [period, "period"]])
+    |
+    | **Get taker long short ratio.**
+    
+    :API endpoint: ``GET /futures/data/takerlongshortRatio``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#taker-buy-sell-volume
 
+    :parameter symbol: string; the trading symbol.
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 30, max 500.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+
+    **Notes**
+        - If startTime and endTime are not sent, the most recent data is returned.
+        - Only the data of the latest 30 days is available.
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [period, "period"]])
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/takerlongshortRatio", params)
 
 
 def blvt_kline(self, symbol: str, interval: str, **kwargs):
-    """Get Historical BLVT NAV Kline
-    
-    GET /fapi/v1/lvtKlines
-
-    https://binance-docs.github.io/apidocs/futures/en/#historical-blvt-nav-kline-candlestick
-
-    Args:
-        symbol (str): the trading symbol
-        interval (str)
-        (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
-    Keyword Args:
-        limit (int, optional): limit the results. Default 500; max 1000.
-        startTime (int, optional)
-        endTime (int, optional)
-    If startTime and endTime are not sent, the most recent data is returned.
     """
-    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
+    |
+    | **Get Historical BLVT NAV Kline**
+    
+    :API endpoint: ``GET /fapi/v1/lvtKlines``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#historical-blvt-nav-kline-candlestick
 
+    :parameter symbol: string; the trading symbol.
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+
+    **Notes**
+        - If startTime and endTime are not sent, the most recent data is returned.
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
     params = {"symbol": symbol, "interval": interval, **kwargs}
     return self.query("/fapi/v1/lvtKlines", params)
 
 
 def index_info(self, symbol: str = None):
-    """Get index composite
+    """
+    |
+    | **Get Index Composite**
 
-    GET /fapi/v1/indexInfo
+    :API endpoint: ``GET /fapi/v1/indexInfo``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#composite-index-symbol-information
 
-    https://binance-docs.github.io/apidocs/futures/en/#composite-index-symbol-information
+    :parameter symbol: optional string; the trading symbol.
 
-    Args:
-        symbol (str, optional): the trading symbol
-    Only for composite index symbols
+    **Notes**
+        - Only for composite index symbols.
+    |
     """
 
     params = {
@@ -461,14 +486,15 @@ def index_info(self, symbol: str = None):
 
 
 def asset_Index(self, symbol: str = None):
-    """Get asset index for Multi-Assets mode
+    """
+    |
+    | **Get asset index for Multi-Assets mode**
 
-    GET /fapi/v1/assetIndex
+    :API endpoint: ``GET /fapi/v1/assetIndex``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index
 
-    https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index
-
-    Args:
-        symbol (str, optional): Asset pair in multi asset mode(like BTCUSD)
+    :parameter symbol: optional string; Asset pair in multi asset mode (ex: BTCUSD).
+    |
     """
 
     params = {
