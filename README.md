@@ -19,6 +19,10 @@ This is a lightweight library that works as a connector to [Binance Futures publ
 pip install binance-futures-connector
 ```
 
+## Documentation
+USDT-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/USD-M-Futures
+COIN-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/COIN-M-Futures
+
 ## RESTful APIs
 
 Usage examples:
