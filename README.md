@@ -20,7 +20,7 @@ pip install binance-futures-connector
 ```
 
 ## Documentation
-- USDT-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/USD-M-Futures
+- USDT-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/USDT-M-Futures
 - COIN-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/COIN-M-Futures
 
 ## RESTful APIs
