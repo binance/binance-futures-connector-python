@@ -33,7 +33,7 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms or 1000ms
         """
         self.live_subscribe(
-            "{}@markPrice{}s".format(symbol.lower(),speed), id, callback, **kwargs
+            "{}@markPrice@{}s".format(symbol.lower(),speed), id, callback, **kwargs
         )
 
     def kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
