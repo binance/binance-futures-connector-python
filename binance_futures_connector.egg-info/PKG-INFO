@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: binance-futures-connector
-Version: 1.5.0
+Version: 1.7.0
 Summary: This is a lightweight library that works as a connector to Binance Futures public API.
 Home-page: https://github.com/binance/binance-futures-connector-python
 License: MIT
@@ -37,6 +37,10 @@ This is a lightweight library that works as a connector to [Binance Futures publ
 ```bash
 pip install binance-futures-connector
 ```
+
+## Documentation
+- USDT-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/USDT-M-Futures
+- COIN-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/COIN-M-Futures
 
 ## RESTful APIs
 

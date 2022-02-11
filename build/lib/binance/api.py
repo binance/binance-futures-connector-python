@@ -1,3 +1,5 @@
+import sys
+
 import hmac
 import json
 import logging

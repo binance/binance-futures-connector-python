@@ -1,5 +1,4 @@
 import sys
-sys.path.append('/Users/andreachang/downloads/binance-futures-connector-python-3')
 
 import hmac
 import json
