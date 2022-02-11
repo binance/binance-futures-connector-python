@@ -234,7 +234,7 @@ def query_order(self, symbol: str, orderId: int = None, origClientOrderId: str =
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
-    elif (orderId is None):
+    elif (origClientOrderId is None):
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}
