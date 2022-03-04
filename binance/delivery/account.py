@@ -251,7 +251,7 @@ def cancel_order(self, symbol: str, orderId: int = None, origClientOrderId: str 
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
-    elif (orderId is None):
+    elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}
@@ -302,7 +302,7 @@ def cancel_batch_order(self, symbol: str, orderIdList: list, origClientOrderIdLi
 
     if (orderIdList is None) and (origClientOrderIdList is None):
         check_required_parameters([[symbol, "symbol"], [orderIdList, "orderIdList"], [origClientOrderIdList, "origClientOrderIdList"]])
-    elif (orderIdList is None):
+    elif orderIdList:
         params = {"symbol": symbol, "orderIdList": orderIdList, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderIdList": origClientOrderIdList, **kwargs}
