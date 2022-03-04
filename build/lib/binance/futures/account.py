@@ -1,5 +1,4 @@
 import sys
-sys.path.append('/Users/andreachang/downloads/binance-futures-connector-python-3')
 
 from binance.lib.utils import check_required_parameter
 from binance.lib.utils import check_required_parameters
@@ -314,7 +313,7 @@ def cancel_batch_order(self, symbol: str, orderIdList: list, origClientOrderIdLi
 
     if (orderIdList is None) and (origClientOrderIdList is None):
         check_required_parameters([[symbol, "symbol"], [orderIdList, "orderIdList"], [origClientOrderIdList, "origClientOrderIdList"]])
-    elif (orderIdList is None):
+    elif orderIdList:
         params = {"symbol": symbol, "orderIdList": orderIdList, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderIdList": origClientOrderIdList, **kwargs}
