@@ -96,6 +96,17 @@ from binance.futures import Futures as Client
 client= Client(timeout=1)
 ```
 
+### Proxy
+proxy is supported
+
+```python
+from binance.futures import Futures as Client
+
+proxies = { 'https': 'http://1.2.3.4:8080' }
+
+client= Client(proxies=proxies)
+```
+
 ### Response Metadata
 
 The Binance API server provides weight usages in the headers of each response.
