@@ -1,6 +1,3 @@
-import sys
-sys.path.append('/Users/andreachang/downloads/binance-futures-connector-python-3')
-
 from binance.lib.utils import check_required_parameter
 from binance.lib.utils import check_required_parameters
 
@@ -234,7 +231,7 @@ def query_order(self, symbol: str, orderId: int = None, origClientOrderId: str =
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
-    elif origClientOrderId:
+    elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}
@@ -314,7 +311,7 @@ def cancel_batch_order(self, symbol: str, orderIdList: list, origClientOrderIdLi
 
     if (orderIdList is None) and (origClientOrderIdList is None):
         check_required_parameters([[symbol, "symbol"], [orderIdList, "orderIdList"], [origClientOrderIdList, "origClientOrderIdList"]])
-    elif (orderIdList is None):
+    elif orderIdList:
         params = {"symbol": symbol, "orderIdList": orderIdList, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderIdList": origClientOrderIdList, **kwargs}
@@ -376,7 +373,7 @@ def get_open_orders(self, symbol: str, orderId: int = None, origClientOrderId: s
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], [origClientOrderId, "origClientOrderId"]])
-    elif (orderId is None):
+    elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}

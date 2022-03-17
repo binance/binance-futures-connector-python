@@ -106,7 +106,7 @@ def modify_order(self, symbol: str, side: str, orderId: int = None, origClientOr
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [side, "side"], [orderId, "orderId"]])
-    elif (orderId is None):
+    elif orderId:
         params = {"symbol": symbol, "side": side, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "side": side, "origClientOrderId": origClientOrderId, **kwargs}
@@ -192,7 +192,7 @@ def order_modify_history(self, symbol: str, orderId: int = None, origClientOrder
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
-    elif (orderId is None):
+    elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}
@@ -221,7 +221,7 @@ def query_order(self, symbol: str, orderId: int = None, origClientOrderId: str =
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
-    elif (origClientOrderId is None):
+    elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}
@@ -366,7 +366,7 @@ def get_open_orders(self, symbol: str, orderId: int = None, origClientOrderId: s
 
     if (orderId is None) and (origClientOrderId is None):
         check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], [origClientOrderId, "origClientOrderId"]])
-    elif (orderId is None):
+    elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}

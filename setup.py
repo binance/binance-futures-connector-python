@@ -12,7 +12,7 @@ DESCRIPTION = (
 )
 AUTHOR = "Futures"
 URL = "https://github.com/binance/binance-futures-connector-python"
-VERSION = "1.9.0"
+VERSION = "1.10.0"
 
 about = {}
 

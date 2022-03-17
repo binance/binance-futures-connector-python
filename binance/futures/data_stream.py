@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/Users/andreachang/downloads/binance-futures-connector-python-3')
 from binance.lib.utils import check_required_parameter
 
 

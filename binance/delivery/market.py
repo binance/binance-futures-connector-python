@@ -1,6 +1,4 @@
-from binance.lib.utils import (
-    check_required_parameter,
-)
+from binance.lib.utils import check_required_parameter
 from binance.lib.utils import check_required_parameters
 
 
@@ -361,7 +359,7 @@ def open_interest(self, symbol: str):
 
     check_required_parameter(symbol, "symbol")
     params = {"symbol": symbol}
-    return self.query("/dapi/v1/ticker/bookTicker", params)
+    return self.query("/dapi/v1/openInterest", params)
 
 
 def open_interest_hist(self, pair: str, contractType: str, period: str, **kwargs):

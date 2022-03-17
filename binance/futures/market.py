@@ -1,8 +1,4 @@
-import sys
-sys.path.append('/Users/andreachang/downloads/binance-futures-connector-python-3')
-from binance.lib.utils import (
-    check_required_parameter,
-)
+from binance.lib.utils import check_required_parameter
 from binance.lib.utils import check_required_parameters
 
 
@@ -337,7 +333,7 @@ def open_interest(self, symbol: str):
 
     check_required_parameter(symbol, "symbol")
     params = {"symbol": symbol}
-    return self.query("/fapi/v1/ticker/bookTicker", params)
+    return self.query("/fapi/v1/openInterest", params)
 
 
 def open_interest_hist(self, symbol: str, period: str, **kwargs):
