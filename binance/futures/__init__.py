@@ -28,6 +28,7 @@ class Futures(API):
     from binance.futures.market import open_interest_hist
     from binance.futures.market import top_long_short_position_ratio
     from binance.futures.market import long_short_account_ratio
+    from binance.futures.market import top_long_short_account_ratio
     from binance.futures.market import taker_long_short_ratio
     from binance.futures.market import blvt_kline
     from binance.futures.market import index_info

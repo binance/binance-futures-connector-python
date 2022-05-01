@@ -410,6 +410,29 @@ def long_short_account_ratio(self, symbol: str, period: str, **kwargs):
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/globalLongShortAccountRatio", params)
 
+def top_long_short_account_ratio(self, symbol: str, period: str, **kwargs):
+    """
+    |
+    | **Get top long short account ratio.**
+    
+    :API endpoint: ``GET /futures/data/topLongShortAccountRatio``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-accounts
+
+    :parameter symbol: string; the trading symbol.
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/futures/en/#public-endpoints-info)
+    :parameter limit: optional int; limit the results. Default 30, max 500.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+
+    **Notes**
+        - If startTime and endTime are not sent, the most recent data is returned.
+        - Only the data of the latest 30 days is available.
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [period, "period"]])
+    params = {"symbol": symbol, "period": period, **kwargs}
+    return self.query("/futures/data/topLongShortAccountRatio", params)
 
 def taker_long_short_ratio(self, symbol: str, period: str, **kwargs):
     """
