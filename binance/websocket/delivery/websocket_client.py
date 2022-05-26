@@ -10,7 +10,7 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
 
         The Aggregate Trade Streams push market trade information that is aggregated for a single taker order every 100 milliseconds.
         Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
-        
+
         Stream Name: <symbol>@aggTrade
 
         https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams
@@ -23,7 +23,7 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
 
     def index_price(self, pair: str, id: int, speed: int, callback, **kwargs):
         """Index Price Streams
-        
+
         Stream Name: <pair>@indexPrice OR <pair>@indexPrice@1s
 
         https://binance-docs.github.io/apidocs/delivery/en/#index-price-stream
@@ -31,12 +31,12 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms OR 1000ms
         """
         self.live_subscribe(
-            "{}@indexPrice@{}s".format(pair.lower(),speed), id, callback, **kwargs
+            "{}@indexPrice@{}s".format(pair.lower(), speed), id, callback, **kwargs
         )
 
     def mark_price(self, symbol: str, id: int, speed: int, callback, **kwargs):
         """Mark Price Streams
-        
+
         Stream Name: <symbol>@markPrice OR <symbol>@markPrice@1s
 
         https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream
@@ -44,12 +44,12 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms OR 1000ms
         """
         self.live_subscribe(
-            "{}@markPrice@{}s".format(symbol.lower(),speed), id, callback, **kwargs
+            "{}@markPrice@{}s".format(symbol.lower(), speed), id, callback, **kwargs
         )
 
     def pair_mark_price(self, pair: str, id: int, speed: int, callback, **kwargs):
         """Mark Price of All Symbols of a Pair
-        
+
         Stream Name: <pair>@markPrice OR <pair>@markPrice@1s
 
         https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair
@@ -57,7 +57,7 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms OR 1000ms
         """
         self.live_subscribe(
-            "{}@markPrice@{}s".format(pair.lower(),speed), id, callback, **kwargs
+            "{}@markPrice@{}s".format(pair.lower(), speed), id, callback, **kwargs
         )
 
     def kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
@@ -95,7 +95,9 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
             "{}@kline_{}".format(symbol.lower(), interval), id, callback, **kwargs
         )
 
-    def continuous_kline(self, pair: str, id: int, contractType: str, interval: str, callback, **kwargs):
+    def continuous_kline(
+        self, pair: str, id: int, contractType: str, interval: str, callback, **kwargs
+    ):
         """Continuous Kline/Candlestick Streams
 
         The Kline/Candlestick Stream push updates to Kline/candlestick bars for a specific contract type. every 250 milliseconds
@@ -127,8 +129,11 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}_{}@continuousKline_{}".format(pair.lower(), contractType, interval), id, callback, **kwargs
-        )        
+            "{}_{}@continuousKline_{}".format(pair.lower(), contractType, interval),
+            id,
+            callback,
+            **kwargs
+        )
 
     def index_kline(self, pair: str, id: int, interval: str, callback, **kwargs):
         """Kline/Candlestick chart intervals Streams
@@ -160,8 +165,11 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@indexPriceKline_{}".format(pair.lower(), interval), id, callback, **kwargs
-        ) 
+            "{}@indexPriceKline_{}".format(pair.lower(), interval),
+            id,
+            callback,
+            **kwargs
+        )
 
     def mark_kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
         """Kline/Candlestick chart intervals Streams
@@ -193,8 +201,11 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@markPriceKline_{}".format(symbol.lower(), interval), id, callback, **kwargs
-        )         
+            "{}@markPriceKline_{}".format(symbol.lower(), interval),
+            id,
+            callback,
+            **kwargs
+        )
 
     def mini_ticker(self, id: int, callback, symbol=None, **kwargs):
         """Individual symbol or all symbols mini ticker
@@ -250,7 +261,7 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
 
         https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams
         https://binance-docs.github.io/apidocs/delivery/en/#all-book-tickers-stream
-        
+
         Update Speed: Real-time
         """
 
@@ -266,12 +277,12 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market.
 
         For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
-        
+
         Stream Name: <symbol>@forceOrder or !forceOrder@arr
 
         https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams
         https://binance-docs.github.io/apidocs/delivery/en/#all-market-liquidation-order-streams
-        
+
         Update Speed: 1000ms
         """
         if symbol is None:
@@ -309,7 +320,7 @@ class DeliveryWebsocketClient(BinanceWebsocketClient):
         Stream Name: <symbol>@depth OR <symbol>@depth@500ms OR<symbol>@depth@100ms
 
         https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams
-                
+
         Update Speed: 250ms, 500ms or 100ms
         """
 

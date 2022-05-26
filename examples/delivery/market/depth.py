@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 client = Client()
 
-logging.info(client.depth("BTCUSDT",**{"limit":5}))
+logging.info(client.depth("BTCUSDT", **{"limit": 5}))

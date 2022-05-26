@@ -9,5 +9,5 @@ key = ""
 secret = ""
 
 # historical_trades requires api key in request header
-client = Client(key = key)
-logging.info(client.historical_trades("BTCUSD_PERP", **{"limit" : 10}))
+client = Client(key=key)
+logging.info(client.historical_trades("BTCUSD_PERP", **{"limit": 10}))

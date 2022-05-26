@@ -3,7 +3,9 @@
 import time
 import logging
 from binance.lib.utils import config_logging
-from binance.websocket.delivery.websocket_client import DeliveryWebsocketClient as Client
+from binance.websocket.delivery.websocket_client import (
+    DeliveryWebsocketClient as Client,
+)
 
 config_logging(logging, logging.DEBUG)
 
@@ -18,7 +20,7 @@ my_client.start()
 my_client.kline(
     symbol="BTCUSD_PERP",
     id=12,
-    interval='1m',
+    interval="1m",
     callback=message_handler,
 )
 

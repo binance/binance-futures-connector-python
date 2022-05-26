@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 client = Client()
 
-logging.info(client.open_interest_hist("BTCUSD",'PERPETUAL','1h',**{'limit':30}))
+logging.info(client.open_interest_hist("BTCUSD", "PERPETUAL", "1h", **{"limit": 30}))

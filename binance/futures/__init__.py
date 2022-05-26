@@ -69,7 +69,3 @@ class Futures(API):
     from binance.futures.data_stream import new_listen_key
     from binance.futures.data_stream import renew_listen_key
     from binance.futures.data_stream import close_listen_key
- 
-
-
- 

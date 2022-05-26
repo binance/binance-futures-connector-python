@@ -18,7 +18,7 @@ my_client.start()
 my_client.kline(
     symbol="btcusdt",
     id=12,
-    interval='1d',
+    interval="1d",
     callback=message_handler,
 )
 

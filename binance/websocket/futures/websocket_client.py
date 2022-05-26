@@ -10,7 +10,7 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
 
         The Aggregate Trade Streams push market trade information that is aggregated for a single taker order every 100 milliseconds.
         Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
-        
+
         Stream Name: <symbol>@aggTrade
 
         https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams
@@ -25,7 +25,7 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         """Mark Price Streams
 
         Mark price and funding rate for all symbols pushed every 3 seconds or every second.
-        
+
         Stream Name: <symbol>@markPrice or <symbol>@markPrice@1s
 
         https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream
@@ -33,7 +33,7 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms or 1000ms
         """
         self.live_subscribe(
-            "{}@markPrice@{}s".format(symbol.lower(),speed), id, callback, **kwargs
+            "{}@markPrice@{}s".format(symbol.lower(), speed), id, callback, **kwargs
         )
 
     def kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
@@ -71,7 +71,9 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
             "{}@kline_{}".format(symbol.lower(), interval), id, callback, **kwargs
         )
 
-    def continuous_kline(self, pair: str, id: int, contractType: str, interval: str, callback, **kwargs):
+    def continuous_kline(
+        self, pair: str, id: int, contractType: str, interval: str, callback, **kwargs
+    ):
         """Continuous Kline/Candlestick Streams
 
         The Kline/Candlestick Stream push updates to Kline/candlestick bars for a specific contract type. every 250 milliseconds
@@ -103,8 +105,11 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}_{}@continuousKline_{}".format(pair.lower(), contractType, interval), id, callback, **kwargs
-        )        
+            "{}_{}@continuousKline_{}".format(pair.lower(), contractType, interval),
+            id,
+            callback,
+            **kwargs
+        )
 
     def mini_ticker(self, id: int, callback, symbol=None, **kwargs):
         """Individual symbol or all symbols mini ticker
@@ -160,7 +165,7 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
 
         https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-book-ticker-streams
         https://binance-docs.github.io/apidocs/futures/en/#all-book-tickers-stream
-        
+
         Update Speed: Real-time
         """
 
@@ -176,13 +181,13 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market.
 
         For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
-        
-        Stream Name: <symbol>@forceOrder or 
+
+        Stream Name: <symbol>@forceOrder or
         Stream Name: !forceOrder@arr
 
         https://binance-docs.github.io/apidocs/futures/en/#liquidation-order-streams
         https://binance-docs.github.io/apidocs/futures/en/#all-market-liquidation-order-streams
-        
+
         Update Speed: 1000ms
         """
         if symbol is None:
@@ -191,7 +196,6 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
             self.live_subscribe(
                 "{}@forceOrder".format(symbol.lower()), id, callback, **kwargs
             )
-        
 
     def partial_book_depth(
         self, symbol: str, id: int, level, speed, callback, **kwargs
@@ -221,7 +225,7 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         Stream Name: <symbol>@depth OR <symbol>@depth@500ms OR<symbol>@depth@100ms
 
         https://binance-docs.github.io/apidocs/futures/en/#diff-book-depth-streams
-                
+
         Update Speed: 250ms, 500ms or 100ms
         """
 
@@ -239,7 +243,9 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
 
         """
 
-        self.live_subscribe("{}@tokenNav".format(symbol.upper()), id, callback, **kwargs)
+        self.live_subscribe(
+            "{}@tokenNav".format(symbol.upper()), id, callback, **kwargs
+        )
 
     def blvt_kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
         """BLVT Kline/Candlestick Streams
@@ -283,11 +289,13 @@ class FuturesWebsocketClient(BinanceWebsocketClient):
         Stream Name: <symbol>@compositeIndex
 
         https://binance-docs.github.io/apidocs/futures/en/#composite-index-symbol-information-streams
-        
+
         Update Speed: 1000ms
         """
 
-        self.live_subscribe("{}@compositeIndex".format(symbol.lower()), id, callback, **kwargs)
+        self.live_subscribe(
+            "{}@compositeIndex".format(symbol.lower()), id, callback, **kwargs
+        )
 
     def user_data(self, listen_key: str, id: int, callback, **kwargs):
         """listen to user data by provided listenkey"""

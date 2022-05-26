@@ -9,7 +9,7 @@ config_logging(logging, logging.DEBUG)
 key = ""
 secret = ""
 
-client = Client(key, secret,base_url="https://fapi.binance.com")
+client = Client(key, secret, base_url="https://fapi.binance.com")
 
 try:
     response = client.adl_quantile(symbol="BTCUSDT", recvWindow=6000)

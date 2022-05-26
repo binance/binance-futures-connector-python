@@ -9,9 +9,11 @@ config_logging(logging, logging.DEBUG)
 key = ""
 secret = ""
 
-client = Client(key, secret,base_url="https://dapi.binance.com")
+client = Client(key, secret, base_url="https://dapi.binance.com")
 try:
-    response = client.modify_isolated_position_margin(symbol='BTCUSD_PERP', amount = 100, type = 1, recvWindow=6000)
+    response = client.modify_isolated_position_margin(
+        symbol="BTCUSD_PERP", amount=100, type=1, recvWindow=6000
+    )
     logging.info(response)
 except ClientError as error:
     logging.error(

@@ -77,7 +77,7 @@ def trades(self, symbol: str, **kwargs):
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     |
     """
-    
+
     check_required_parameter(symbol, "symbol")
     params = {"symbol": symbol, **kwargs}
     return self.query("/dapi/v1/trades", params)
@@ -108,7 +108,7 @@ def agg_trades(self, symbol: str, **kwargs):
     |
     | **Compressed/Aggregate Trades List**
     | *Get compressed, aggregate market trades. Market trades that fill at the time, from the same order, with the same price will have the quantity aggregated.*
-    
+
     :API endpoint: ``GET /dapi/v1/aggTrades``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#compressed-aggregate-trades-list
 
@@ -151,8 +151,8 @@ def continuous_klines(self, pair: str, contractType: str, interval: str, **kwarg
     """
     |
     | **Continuous Kline/Candlestick Data**
-    | *Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.*  
-    
+    | *Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.*
+
     :API endpoint: ``GET /dapi/v1/continuousKlines``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-data
 
@@ -165,8 +165,15 @@ def continuous_klines(self, pair: str, contractType: str, interval: str, **kwarg
     |
     """
 
-    check_required_parameters([[pair, "pair"], [contractType,"contractType"], [interval, "interval"]])
-    params = {"pair": pair, "contractType":contractType, "interval": interval, **kwargs}
+    check_required_parameters(
+        [[pair, "pair"], [contractType, "contractType"], [interval, "interval"]]
+    )
+    params = {
+        "pair": pair,
+        "contractType": contractType,
+        "interval": interval,
+        **kwargs,
+    }
     return self.query("/dapi/v1/continuousKlines", params)
 
 
@@ -174,8 +181,8 @@ def index_price_klines(self, pair: str, interval: str, **kwargs):
     """
     |
     | **Kline/Candlestick Data for the index price of a pair.**
-    | *Klines are uniquely identified by their open time.*  
-    
+    | *Klines are uniquely identified by their open time.*
+
     :API endpoint: ``GET /dapi/v1/indexPriceKlines``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#index-price-kline-candlestick-data
 
@@ -197,7 +204,7 @@ def mark_price_klines(self, symbol: str, interval: str, **kwargs):
     |
     | **Kline/candlestick bars for the mark price of a symbol.**
     | *Klines are uniquely identified by their open time.*
-    
+
     :API endpoint: ``GET /dapi/v1/markPriceKlines``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-data
 
@@ -206,7 +213,7 @@ def mark_price_klines(self, symbol: str, interval: str, **kwargs):
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     :parameter startTime: optional int; Timestamp in ms to get aggregate trades from INCLUSIVE.
     :parameter endTime: optional int; Timestamp in ms to get aggregate trades until INCLUSIVE.
-    
+
     **Notes**
         - The difference between startTime and endTime can only be up to 200 days
         - Between startTime and endTime, the most recent limit data from endTime will be returned:
@@ -252,12 +259,12 @@ def funding_rate(self, symbol: str, **kwargs):
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     :parameter startTime: optional int; Timestamp in ms to get aggregate trades from INCLUSIVE.
     :parameter endTime: optional int; Timestamp in ms to get aggregate trades until INCLUSIVE.
-    
+
     **Notes**
         - Empty array will be returned for delivery symbols.
     |
     """
-    
+
     params = {"symbol": symbol, **kwargs}
     return self.query("/dapi/v1/fundingRate", params)
 
@@ -284,7 +291,7 @@ def ticker_24hr_price_change(self, symbol: str = None, pair: str = None):
 
     if (symbol is None) and (pair is None):
         return self.query("/dapi/v1/ticker/24hr")
-    elif (symbol is None):
+    elif symbol is None:
         params = {"pair": pair}
     else:
         params = {"symbol": symbol}
@@ -312,7 +319,7 @@ def ticker_price(self, symbol: str = None, pair: str = None):
 
     if (symbol is None) and (pair is None):
         return self.query("/dapi/v1/ticker/price")
-    elif (symbol is None):
+    elif symbol is None:
         params = {"pair": pair}
     else:
         params = {"symbol": symbol}
@@ -337,7 +344,7 @@ def book_ticker(self, symbol: str = None, pair: str = None):
 
     if (symbol is None) and (pair is None):
         return self.query("/dapi/v1/ticker/bookTicker")
-    elif (symbol is None):
+    elif symbol is None:
         params = {"pair": pair}
     else:
         params = {"symbol": symbol}
@@ -366,7 +373,7 @@ def open_interest_hist(self, pair: str, contractType: str, period: str, **kwargs
     """
     |
     | **Get historical open interest of a specific symbol**
-    
+
     :API endpoint: ``GET /futures/data/openInterestHist``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#open-interest-statistics-market-data
 
@@ -383,7 +390,9 @@ def open_interest_hist(self, pair: str, contractType: str, period: str, **kwargs
     |
     """
 
-    check_required_parameters([[pair, "pair"], [contractType, "contractType"], [period, "period"]])
+    check_required_parameters(
+        [[pair, "pair"], [contractType, "contractType"], [period, "period"]]
+    )
     params = {"pair": pair, "contractType": contractType, "period": period, **kwargs}
     return self.query("/futures/data/openInterestHist", params)
 
@@ -392,7 +401,7 @@ def top_long_short_account_ratio(self, pair: str, period: str, **kwargs):
     """
     |
     | **Get top long short account ratio**
-    
+
     :API endpoint: `GET /futures/data/topLongShortAccountRatio`
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-accounts-market-data
 
@@ -417,7 +426,7 @@ def top_long_short_position_ratio(self, pair: str, period: str, **kwargs):
     """
     |
     | **Get top long short position ratio**
-    
+
     :API endpoint: ``GET /futures/data/topLongShortPositionRatio``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-positions-market-data
 
@@ -442,7 +451,7 @@ def long_short_account_ratio(self, pair: str, period: str, **kwargs):
     """
     |
     | **Get top long short account ratio**
-    
+
     :API endpoint: ``GET /futures/data/globalLongShortAccountRatio``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-accounts-market-data
 
@@ -467,7 +476,7 @@ def taker_long_short_ratio(self, pair: str, contractType: str, period: str, **kw
     """
     |
     | **Get taker long short ratio**
-    
+
     :API endpoint: ``GET /futures/data/takerBuySellVol``
     :API doc: https://binance-docs.github.io/apidocs/delivery/en/#taker-buy-sell-volume-market-data
 
@@ -484,7 +493,9 @@ def taker_long_short_ratio(self, pair: str, contractType: str, period: str, **kw
     |
     """
 
-    check_required_parameters([[pair, "pair"], [contractType, "contractType"], [period, "period"]])
+    check_required_parameters(
+        [[pair, "pair"], [contractType, "contractType"], [period, "period"]]
+    )
     params = {"pair": pair, "contractType": contractType, "period": period, **kwargs}
     return self.query("/futures/data/takerBuySellVol", params)
 
@@ -510,6 +521,8 @@ def basis(self, pair: str, contractType: str, period: str, **kwargs):
     |
     """
 
-    check_required_parameters([[pair, "pair"], [contractType, "contractType"], [period, "period"]])
+    check_required_parameters(
+        [[pair, "pair"], [contractType, "contractType"], [period, "period"]]
+    )
     params = {"pair": pair, "contractType": contractType, "period": period, **kwargs}
     return self.query("/futures/data/basis", params)

@@ -12,7 +12,14 @@ secret = ""
 client = Client(key, secret, base_url="https://fapi.binance.com")
 
 try:
-    response = client.new_order_test(symbol="BTCUSDT", side = "SELL", type= "LIMIT", quantity= 0.001, timeInForce="GTC", price= 59808.02)
+    response = client.new_order_test(
+        symbol="BTCUSDT",
+        side="SELL",
+        type="LIMIT",
+        quantity=0.001,
+        timeInForce="GTC",
+        price=59808.02,
+    )
     logging.info(response)
 except ClientError as error:
     logging.error(

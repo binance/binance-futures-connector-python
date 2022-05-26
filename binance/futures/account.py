@@ -148,7 +148,7 @@ def new_order_test(self, symbol: str, side: str, type: str, **kwargs):
     return self.sign_request("POST", url_path, params)
 
 
-def new_batch_order(self, batchOrders:list):
+def new_batch_order(self, batchOrders: list):
     """
     |
     | **Place Multiple Orders (TRADE)**
@@ -213,7 +213,9 @@ def new_batch_order(self, batchOrders:list):
     return self.sign_request("POST", url_path, params, True)
 
 
-def query_order(self, symbol: str, orderId: int = None, origClientOrderId: str = None, **kwargs):
+def query_order(
+    self, symbol: str, orderId: int = None, origClientOrderId: str = None, **kwargs
+):
     """
     |
     | **Query Order (USER_DATA)**
@@ -230,7 +232,13 @@ def query_order(self, symbol: str, orderId: int = None, origClientOrderId: str =
     """
 
     if (orderId is None) and (origClientOrderId is None):
-        check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
+        check_required_parameters(
+            [
+                [symbol, "symbol"],
+                [orderId, "orderId"],
+                ["origClientOrderId", origClientOrderId],
+            ]
+        )
     elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
@@ -240,7 +248,9 @@ def query_order(self, symbol: str, orderId: int = None, origClientOrderId: str =
     return self.sign_request("GET", url_path, params)
 
 
-def cancel_order(self, symbol: str, orderId: int = None, origClientOrderId: str = None, **kwargs):
+def cancel_order(
+    self, symbol: str, orderId: int = None, origClientOrderId: str = None, **kwargs
+):
     """
     |
     | **Cancel Order (TRADE)**
@@ -258,7 +268,13 @@ def cancel_order(self, symbol: str, orderId: int = None, origClientOrderId: str 
     """
 
     if (orderId is None) and (origClientOrderId is None):
-        check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], ["origClientOrderId", origClientOrderId]])
+        check_required_parameters(
+            [
+                [symbol, "symbol"],
+                [orderId, "orderId"],
+                ["origClientOrderId", origClientOrderId],
+            ]
+        )
     elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
@@ -283,11 +299,13 @@ def cancel_open_orders(self, symbol: str, **kwargs):
 
     url_path = "/fapi/v1/allOpenOrders"
     params = {"symbol": symbol, **kwargs}
-    
+
     return self.sign_request("DELETE", url_path, params)
 
 
-def cancel_batch_order(self, symbol: str, orderIdList: list, origClientOrderIdList: list, **kwargs):
+def cancel_batch_order(
+    self, symbol: str, orderIdList: list, origClientOrderIdList: list, **kwargs
+):
     """
     |
     | **Cancel Multiple Orders (TRADE)**
@@ -305,17 +323,27 @@ def cancel_batch_order(self, symbol: str, orderIdList: list, origClientOrderIdLi
         - Either orderIdList or origClientOrderIdList must be sent.
     |
     """
-    
+
     url_path = "/fapi/v1/batchOrders"
     params = {}
 
     if (orderIdList is None) and (origClientOrderIdList is None):
-        check_required_parameters([[symbol, "symbol"], [orderIdList, "orderIdList"], [origClientOrderIdList, "origClientOrderIdList"]])
+        check_required_parameters(
+            [
+                [symbol, "symbol"],
+                [orderIdList, "orderIdList"],
+                [origClientOrderIdList, "origClientOrderIdList"],
+            ]
+        )
     elif orderIdList:
         params = {"symbol": symbol, "orderIdList": orderIdList, **kwargs}
     else:
-        params = {"symbol": symbol, "origClientOrderIdList": origClientOrderIdList, **kwargs}
-    
+        params = {
+            "symbol": symbol,
+            "origClientOrderIdList": origClientOrderIdList,
+            **kwargs,
+        }
+
     return self.sign_request("DELETE", url_path, params)
 
 
@@ -338,10 +366,10 @@ def countdown_cancel_order(self, symbol: str, countdownTime: int, **kwargs):
             - Call this endpoint at 30s intervals with an countdownTime of 120000 (120s).
             - If this endpoint is not called within 120 seconds, all your orders of the specified symbol will be automatically canceled.
             - If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
-        - The system will check all countdowns approximately every 10 milliseconds, so please note that sufficient redundancy should be considered when using this function. 
+        - The system will check all countdowns approximately every 10 milliseconds, so please note that sufficient redundancy should be considered when using this function.
         - We do not recommend setting the countdown time to be too precise or too small.
     """
-    
+
     check_required_parameters([[symbol, "symbol"], [countdownTime, "countdownTime"]])
     url_path = "/fapi/v1/countdownCancelAll"
     params = {"symbol": symbol, "countdownTime": countdownTime, **kwargs}
@@ -349,7 +377,9 @@ def countdown_cancel_order(self, symbol: str, countdownTime: int, **kwargs):
     return self.sign_request("POST", url_path, params)
 
 
-def get_open_orders(self, symbol: str, orderId: int = None, origClientOrderId: str = None, **kwargs):
+def get_open_orders(
+    self, symbol: str, orderId: int = None, origClientOrderId: str = None, **kwargs
+):
     """
     |
     | **Query Current Open Order (USER_DATA)**
@@ -362,7 +392,7 @@ def get_open_orders(self, symbol: str, orderId: int = None, origClientOrderId: s
     :parameter orderId: optional int
     :parameter origClientOrderId: optional int
     :parameter recvWindow: optional int; the value cannot be greater than 60000.
-        
+
     **Notes**
         - Either orderId or origClientOrderId must be sent
         - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
@@ -372,12 +402,18 @@ def get_open_orders(self, symbol: str, orderId: int = None, origClientOrderId: s
     params = {}
 
     if (orderId is None) and (origClientOrderId is None):
-        check_required_parameters([[symbol, "symbol"], [orderId, "orderId"], [origClientOrderId, "origClientOrderId"]])
+        check_required_parameters(
+            [
+                [symbol, "symbol"],
+                [orderId, "orderId"],
+                [origClientOrderId, "origClientOrderId"],
+            ]
+        )
     elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
         params = {"symbol": symbol, "origClientOrderId": origClientOrderId, **kwargs}
-    
+
     return self.sign_request("GET", url_path, params)
 
 
@@ -397,7 +433,7 @@ def get_orders(self, **kwargs):
     """
 
     url_path = "/fapi/v1/openOrders"
-    params = { **kwargs }
+    params = {**kwargs}
 
     return self.sign_request("GET", url_path, params)
 
@@ -476,9 +512,9 @@ def change_leverage(self, symbol: str, leverage: int, **kwargs):
     |
     """
 
-    check_required_parameters([[symbol, "symbol"],[leverage, "leverage"]])
+    check_required_parameters([[symbol, "symbol"], [leverage, "leverage"]])
     url_path = "/fapi/v1/leverage"
-    params = {"symbol": symbol, "leverage":leverage, **kwargs}
+    params = {"symbol": symbol, "leverage": leverage, **kwargs}
     return self.sign_request("POST", url_path, params)
 
 
@@ -497,14 +533,16 @@ def change_margin_type(self, symbol: str, marginType: str, **kwargs):
     |
     """
 
-    check_required_parameters([[symbol, "symbol"],[marginType, "marginType"]])
+    check_required_parameters([[symbol, "symbol"], [marginType, "marginType"]])
 
     url_path = "/fapi/v1/marginType"
-    params = {"symbol": symbol, "marginType":marginType, **kwargs}
+    params = {"symbol": symbol, "marginType": marginType, **kwargs}
     return self.sign_request("POST", url_path, params)
 
 
-def modify_isolated_position_margin(self, symbol: str, amount: float, type: int, **kwargs):
+def modify_isolated_position_margin(
+    self, symbol: str, amount: float, type: int, **kwargs
+):
     """
     |
     | **Modify Isolated Position Margin (TRADE)**
@@ -520,9 +558,9 @@ def modify_isolated_position_margin(self, symbol: str, amount: float, type: int,
     |
     """
 
-    check_required_parameters([[symbol, "symbol"],[amount, "amount"], [type, "type"]])
+    check_required_parameters([[symbol, "symbol"], [amount, "amount"], [type, "type"]])
     url_path = "/fapi/v1/positionMargin"
-    params = {"symbol": symbol, "amount":amount, "type":type, **kwargs}
+    params = {"symbol": symbol, "amount": amount, "type": type, **kwargs}
     return self.sign_request("POST", url_path, params)
 
 
@@ -571,7 +609,7 @@ def get_position_risk(self, **kwargs):
     return self.sign_request("GET", url_path, params)
 
 
-def get_account_trades(self, symbol:str, **kwargs):
+def get_account_trades(self, symbol: str, **kwargs):
     """
     |
     | **Account Trade List (USER_DATA)**
@@ -739,6 +777,6 @@ def commission_rate(self, symbol: str, **kwargs):
 
     check_required_parameter(symbol, "symbol")
     url_path = "/fapi/v1/commissionRate"
-    params = {"symbol":symbol, **kwargs}
+    params = {"symbol": symbol, **kwargs}
 
     return self.sign_request("GET", url_path, params)

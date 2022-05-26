@@ -7,10 +7,3 @@ config_logging(logging, logging.DEBUG)
 
 futures_client = Client()
 logging.info(futures_client.agg_trades("BTCUSDT"))
-
-
-
-
-
-
-

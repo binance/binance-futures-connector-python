@@ -12,7 +12,7 @@ secret = ""
 client = Client(key, secret, base_url="https://fapi.binance.com")
 
 try:
-    response = client.cancel_order(symbol = "BTCUSDT", orderId=123456, recvWindow=2000)
+    response = client.cancel_order(symbol="BTCUSDT", orderId=123456, recvWindow=2000)
     logging.info(response)
 except ClientError as error:
     logging.error(

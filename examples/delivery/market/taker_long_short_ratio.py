@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 client = Client()
 
-logging.info(client.taker_long_short_ratio("BTCUSD","PERPETUAL","1d"))
+logging.info(client.taker_long_short_ratio("BTCUSD", "PERPETUAL", "1d"))

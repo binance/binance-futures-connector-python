@@ -46,5 +46,3 @@ def close_listen_key(self, listenKey: str):
     check_required_parameter(listenKey, "listenKey")
     url_path = "/dapi/v1/listenKey"
     return self.send_request("DELETE", url_path, {"listenKey": listenKey})
-
-

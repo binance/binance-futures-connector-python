@@ -15,11 +15,7 @@ def message_handler(message):
 my_client = Client()
 my_client.start()
 
-my_client.mini_ticker(
-    id=1,
-    callback=message_handler,
-    symbol="btcusdt"
-)
+my_client.mini_ticker(id=1, callback=message_handler, symbol="btcusdt")
 
 time.sleep(2)
 

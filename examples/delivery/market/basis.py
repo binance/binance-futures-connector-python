@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 client = Client()
 
-logging.info(client.basis("BTCUSD","PERPETUAL","1d"))
+logging.info(client.basis("BTCUSD", "PERPETUAL", "1d"))

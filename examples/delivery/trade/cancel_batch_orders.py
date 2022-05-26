@@ -12,7 +12,9 @@ secret = ""
 client = Client(key, secret, base_url="https://dapi.binance.com")
 
 try:
-    response = client.cancel_batch_order(symbol = "BTCUSD_PERP", orderIdList=[1234567,2345678], recvWindow=2000)
+    response = client.cancel_batch_order(
+        symbol="BTCUSD_PERP", orderIdList=[1234567, 2345678], recvWindow=2000
+    )
     logging.info(response)
 except ClientError as error:
     logging.error(

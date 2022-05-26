@@ -6,4 +6,4 @@ from binance.lib.utils import config_logging
 config_logging(logging, logging.DEBUG)
 
 client = Client()
-logging.info(client.continuous_klines("BTCUSD", 'PERPETUAL', '1d'))
+logging.info(client.continuous_klines("BTCUSD", "PERPETUAL", "1d"))

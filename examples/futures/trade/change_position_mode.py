@@ -12,7 +12,7 @@ secret = ""
 client = Client(key, secret, base_url="https://fapi.binance.com")
 
 try:
-    response = client.change_position_mode(dualSidePosition = "true", recvWindow=2000)
+    response = client.change_position_mode(dualSidePosition="true", recvWindow=2000)
     logging.info(response)
 except ClientError as error:
     logging.error(

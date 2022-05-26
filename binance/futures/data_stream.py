@@ -26,7 +26,7 @@ def renew_listen_key(self, listenKey: str):
     :parameter listenKey: string
     |
     """
-    
+
     check_required_parameter(listenKey, "listenKey")
     url_path = "/fapi/v1/listenKey"
     return self.send_request("PUT", url_path, {"listenKey": listenKey})
@@ -47,5 +47,3 @@ def close_listen_key(self, listenKey: str):
     check_required_parameter(listenKey, "listenKey")
     url_path = "/fapi/v1/listenKey"
     return self.send_request("DELETE", url_path, {"listenKey": listenKey})
-
-

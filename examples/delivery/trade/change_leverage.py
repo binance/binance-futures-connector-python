@@ -9,10 +9,10 @@ config_logging(logging, logging.DEBUG)
 key = ""
 secret = ""
 
-client = Client(key, secret,base_url="https://dapi.binance.com")
+client = Client(key, secret, base_url="https://dapi.binance.com")
 
 try:
-    response = client.change_leverage(symbol='BTCUSD_PERP',leverage = 2, recvWindow=6000)
+    response = client.change_leverage(symbol="BTCUSD_PERP", leverage=2, recvWindow=6000)
     logging.info(response)
 except ClientError as error:
     logging.error(

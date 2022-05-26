@@ -12,7 +12,7 @@ secret = ""
 client = Client(key, secret, base_url="https://dapi.binance.com")
 
 try:
-    response = client.modify_order(symbol="BTCUSD_PERP", orderId = 1123323,  quantity= 0.01)
+    response = client.modify_order(symbol="BTCUSD_PERP", orderId=1123323, quantity=0.01)
     logging.info(response)
 except ClientError as error:
     logging.error(

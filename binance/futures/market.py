@@ -108,7 +108,7 @@ def agg_trades(self, symbol: str, **kwargs):
     |
     | **Compressed/Aggregate Trades List**
     | *Get compressed, aggregate market trades. Market trades that fill at the time, from the same order, with the same price will have the quantity aggregated.*
-    
+
     :API endpoint: ``GET /fapi/v1/aggTrades``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#compressed-aggregate-trades-list
 
@@ -151,8 +151,8 @@ def continuous_klines(self, pair: str, contractType: str, interval: str, **kwarg
     """
     |
     | **Continuous Kline/Candlestick Data**
-    | *Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.*  
-    
+    | *Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.*
+
     :API endpoint: ``GET /fapi/v1/continuousKlines``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-data
 
@@ -165,8 +165,15 @@ def continuous_klines(self, pair: str, contractType: str, interval: str, **kwarg
     |
     """
 
-    check_required_parameters([[pair, "pair"], [contractType,"contractType"], [interval, "interval"]])
-    params = {"pair": pair, "contractType":contractType, "interval": interval, **kwargs}
+    check_required_parameters(
+        [[pair, "pair"], [contractType, "contractType"], [interval, "interval"]]
+    )
+    params = {
+        "pair": pair,
+        "contractType": contractType,
+        "interval": interval,
+        **kwargs,
+    }
     return self.query("/fapi/v1/continuousKlines", params)
 
 
@@ -174,8 +181,8 @@ def index_price_klines(self, pair: str, interval: str, **kwargs):
     """
     |
     | **Kline/Candlestick Data for the index price of a pair.**
-    | *Klines are uniquely identified by their open time.*   
-    
+    | *Klines are uniquely identified by their open time.*
+
     :API endpoint: ``GET /fapi/v1/indexPriceKlines``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#index-price-kline-candlestick-data
 
@@ -197,7 +204,7 @@ def mark_price_klines(self, symbol: str, interval: str, **kwargs):
     |
     | **Kline/candlestick bars for the mark price of a symbol.**
     | *Klines are uniquely identified by their open time.*
-    
+
     :API endpoint: ``GET /fapi/v1/markPriceKlines``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#mark-price-kline-candlestick-data
 
@@ -233,7 +240,7 @@ def mark_price(self, symbol: str):
     return self.query("/fapi/v1/premiumIndex", params)
 
 
-def funding_rate(self, symbol: str,  **kwargs):
+def funding_rate(self, symbol: str, **kwargs):
     """
     |
     | **Funding Rate History
@@ -252,7 +259,7 @@ def funding_rate(self, symbol: str,  **kwargs):
         - In ascending order.
     |
     """
-    
+
     params = {"symbol": symbol, **kwargs}
     return self.query("/fapi/v1/fundingRate", params)
 
@@ -307,7 +314,7 @@ def book_ticker(self, symbol: str = None):
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#symbol-order-book-ticker
 
     :parameter symbol: optional string; the trading symbol.
-    
+
     **Notes**
         - If the symbol is not sent, bookTickers for all symbols will be returned in an array.
     |
@@ -340,7 +347,7 @@ def open_interest_hist(self, symbol: str, period: str, **kwargs):
     """
     |
     | **Get historical open interest of a specific symbol.**
-    
+
     :API endpoint: ``GET /futures/data/openInterestHist``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#open-interest-statistics
 
@@ -365,7 +372,7 @@ def top_long_short_position_ratio(self, symbol: str, period: str, **kwargs):
     """
     |
     | **Get top long short position ratio.**
-    
+
     :API endpoint: ``GET /futures/data/topLongShortPositionRatio``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-positions
 
@@ -390,7 +397,7 @@ def long_short_account_ratio(self, symbol: str, period: str, **kwargs):
     """
     |
     | **Get top long short account ratio.**
-    
+
     :API endpoint: ``GET /futures/data/globalLongShortAccountRatio``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#long-short-ratio
 
@@ -410,11 +417,12 @@ def long_short_account_ratio(self, symbol: str, period: str, **kwargs):
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/globalLongShortAccountRatio", params)
 
+
 def top_long_short_account_ratio(self, symbol: str, period: str, **kwargs):
     """
     |
     | **Get top long short account ratio.**
-    
+
     :API endpoint: ``GET /futures/data/topLongShortAccountRatio``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-accounts
 
@@ -434,11 +442,12 @@ def top_long_short_account_ratio(self, symbol: str, period: str, **kwargs):
     params = {"symbol": symbol, "period": period, **kwargs}
     return self.query("/futures/data/topLongShortAccountRatio", params)
 
+
 def taker_long_short_ratio(self, symbol: str, period: str, **kwargs):
     """
     |
     | **Get taker long short ratio.**
-    
+
     :API endpoint: ``GET /futures/data/takerlongshortRatio``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#taker-buy-sell-volume
 
@@ -463,7 +472,7 @@ def blvt_kline(self, symbol: str, interval: str, **kwargs):
     """
     |
     | **Get Historical BLVT NAV Kline**
-    
+
     :API endpoint: ``GET /fapi/v1/lvtKlines``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#historical-blvt-nav-kline-candlestick
 

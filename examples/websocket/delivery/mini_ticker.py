@@ -3,7 +3,9 @@
 import time
 import logging
 from binance.lib.utils import config_logging
-from binance.websocket.delivery.websocket_client import DeliveryWebsocketClient as Client
+from binance.websocket.delivery.websocket_client import (
+    DeliveryWebsocketClient as Client,
+)
 
 config_logging(logging, logging.DEBUG)
 
@@ -15,11 +17,7 @@ def message_handler(message):
 my_client = Client()
 my_client.start()
 
-my_client.mini_ticker(
-    id=1,
-    callback=message_handler,
-    symbol="btcusd_perp"
-)
+my_client.mini_ticker(id=1, callback=message_handler, symbol="btcusd_perp")
 
 time.sleep(2)
 

@@ -18,8 +18,8 @@ my_client.start()
 my_client.continuous_kline(
     pair="btcusdt",
     id=1,
-    contractType="perpetual", 
-    interval='1d',
+    contractType="perpetual",
+    interval="1d",
     callback=message_handler,
 )
 

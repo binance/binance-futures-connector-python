@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 futures_client = Client()
 
-logging.info(futures_client.open_interest_hist("BTCUSDT",'1h',**{'limit':30}))
+logging.info(futures_client.open_interest_hist("BTCUSDT", "1h", **{"limit": 30}))

@@ -13,7 +13,9 @@ secret = ""
 client = Client(key, secret, base_url="https://dapi.binance.com")
 
 try:
-    response = client.query_order(symbol = "BTCUSD_PERP", orderId = 12345678, recvWindow=2000)
+    response = client.query_order(
+        symbol="BTCUSD_PERP", orderId=12345678, recvWindow=2000
+    )
     logging.info(response)
 except ClientError as error:
     logging.error(

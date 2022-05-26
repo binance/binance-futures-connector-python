@@ -8,4 +8,3 @@ config_logging(logging, logging.DEBUG)
 futures_client = Client()
 
 logging.info(futures_client.klines("BTCUSDT", "1d"))
-

@@ -3,7 +3,9 @@
 import time
 import logging
 from binance.lib.utils import config_logging
-from binance.websocket.delivery.websocket_client import DeliveryWebsocketClient as Client
+from binance.websocket.delivery.websocket_client import (
+    DeliveryWebsocketClient as Client,
+)
 
 config_logging(logging, logging.DEBUG)
 
@@ -17,7 +19,7 @@ my_client.start()
 
 my_client.index_price(
     pair="BTCUSD",
-    speed = 1,
+    speed=1,
     id=1,
     callback=message_handler,
 )

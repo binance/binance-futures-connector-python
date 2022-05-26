@@ -8,8 +8,10 @@ from binance.websocket.futures.websocket_client import FuturesWebsocketClient
 
 config_logging(logging, logging.DEBUG)
 
+
 def message_handler(message):
     print(message)
+
 
 api_key = ""
 client = Client(api_key)

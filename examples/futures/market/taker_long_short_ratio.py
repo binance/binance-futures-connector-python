@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 futures_client = Client()
 
-logging.info(futures_client.taker_long_short_ratio("BTCUSDT","1d"))
+logging.info(futures_client.taker_long_short_ratio("BTCUSDT", "1d"))

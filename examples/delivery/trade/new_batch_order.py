@@ -12,14 +12,14 @@ secret = ""
 client = Client(key, secret, base_url="https://dapi.binance.com")
 
 params = [
-        {
-            "symbol":"BTCUSD_PERP",
-            "side": "BUY",
-            "type": "LIMIT",
-            "quantity": "0.001",
-            "timeInForce": "GTC",
-            "price": "60000.1"
-        }
+    {
+        "symbol": "BTCUSD_PERP",
+        "side": "BUY",
+        "type": "LIMIT",
+        "quantity": "0.001",
+        "timeInForce": "GTC",
+        "price": "60000.1",
+    }
 ]
 
 try:

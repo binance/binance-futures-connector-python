@@ -9,7 +9,7 @@ config_logging(logging, logging.DEBUG)
 key = ""
 secret = ""
 
-client = Client(key, secret,base_url="https://dapi.binance.com")
+client = Client(key, secret, base_url="https://dapi.binance.com")
 
 try:
     response = client.leverage_brackets(symbol="BTCUSD_PERP", recvWindow=6000)

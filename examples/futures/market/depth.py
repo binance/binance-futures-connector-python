@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 futures_client = Client()
 
-logging.info(futures_client.depth("BTCUSDT",**{"limit":5}))
+logging.info(futures_client.depth("BTCUSDT", **{"limit": 5}))

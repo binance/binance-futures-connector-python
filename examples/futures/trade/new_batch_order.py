@@ -12,14 +12,14 @@ secret = ""
 client = Client(key, secret, base_url="https://fapi.binance.com")
 
 params = [
-        {
-            "symbol":"BTCUSDT",
-            "side": "BUY",
-            "type": "LIMIT",
-            "quantity": "0.001",
-            "timeInForce": "GTC",
-            "price": "60000.1"
-        }
+    {
+        "symbol": "BTCUSDT",
+        "side": "BUY",
+        "type": "LIMIT",
+        "quantity": "0.001",
+        "timeInForce": "GTC",
+        "price": "60000.1",
+    }
 ]
 
 try:
@@ -31,6 +31,3 @@ except ClientError as error:
             error.status_code, error.error_code, error.error_message
         )
     )
-
-
-

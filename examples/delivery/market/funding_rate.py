@@ -6,6 +6,4 @@ from binance.lib.utils import config_logging
 config_logging(logging, logging.DEBUG)
 
 client = Client()
-logging.info(client.funding_rate("BTCUSD_PERP",**{'limit':100}))
-
-
+logging.info(client.funding_rate("BTCUSD_PERP", **{"limit": 100}))

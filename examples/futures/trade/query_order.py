@@ -12,7 +12,7 @@ secret = ""
 client = Client(key, secret, base_url="https://fapi.binance.com")
 
 try:
-    response = client.query_order(symbol = "BTCUSDT", orderId = 12345678,recvWindow=2000)
+    response = client.query_order(symbol="BTCUSDT", orderId=12345678, recvWindow=2000)
     logging.info(response)
 except ClientError as error:
     logging.error(
