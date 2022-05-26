@@ -1,5 +1,3 @@
-import sys
-
 import hmac
 import json
 import logging
@@ -145,7 +143,7 @@ class API(object):
         return data
 
     def _prepare_params(self, params, special=False):
-        return encoded_string(cleanNoneValue(params),special)
+        return encoded_string(cleanNoneValue(params), special)
 
     def _get_sign(self, data):
         m = hmac.new(self.secret.encode("utf-8"), data.encode("utf-8"), hashlib.sha256)
