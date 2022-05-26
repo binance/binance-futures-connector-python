@@ -7,12 +7,10 @@ with open(
     requirements = fh.readlines()
 
 NAME = "binance-futures-connector"
-DESCRIPTION = (
-    "This is a lightweight library that works as a connector to Binance Futures public API."
-)
+DESCRIPTION = "This is a lightweight library that works as a connector to Binance Futures public API."
 AUTHOR = "Futures"
 URL = "https://github.com/binance/binance-futures-connector-python"
-VERSION = "1.10.0"
+VERSION = None
 
 about = {}
 
@@ -36,7 +34,7 @@ setup(
     long_description_content_type="text/markdown",
     AUTHOR=AUTHOR,
     url=URL,
-    keywords=["Binance", "Public API"],
+    keywords=["Binance futures", "Public API"],
     install_requires=[req for req in requirements],
     packages=find_packages(exclude=("tests",)),
     classifiers=[

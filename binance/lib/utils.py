@@ -47,11 +47,13 @@ def check_type_parameter(value, name, data_type):
 def get_timestamp():
     return int(time.time() * 1000)
 
-def encoded_string(query, special = False):
-    if(special):
-        return urlencode(query).replace("%40", "@").replace('%27', '%22')
+
+def encoded_string(query, special=False):
+    if special:
+        return urlencode(query).replace("%40", "@").replace("%27", "%22")
     else:
         return urlencode(query, True).replace("%40", "@")
+
 
 def convert_list_to_json_array(symbols):
     if symbols is None:

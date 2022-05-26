@@ -19,23 +19,23 @@ This is a lightweight library that works as a connector to [Binance Futures publ
 pip install binance-futures-connector
 ```
 
-## Documentation
-- USDT-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/USDT-M-Futures
-- COIN-M Futures: https://github.com/Binance-docs/binance-futures-connector-python/wiki/COIN-M-Futures
 
 ## RESTful APIs
 
 Usage examples:
 ```python
-from binance.futures import Futures 
 
-client = Futures()
-print(client.time())
+from binance.cm_futures import CMFutures
 
-client = Futures(key='<api_key>', secret='<api_secret>')
+cm_futures_client = CMFutures()
+
+# get server time
+print(cm_futures_client.time())
+
+cm_futures_client = CMFutures(key='<api_key>', secret='<api_secret>')
 
 # Get account information
-print(client.account())
+print(cm_futures_client.account())
 
 # Post a new order
 params = {
@@ -47,7 +47,7 @@ params = {
     'price': 59808
 }
 
-response = client.new_order(**params)
+response = cm_futures_client.new_order(**params)
 print(response)
 ```
 Please find `examples` folder to check for more endpoints.
@@ -78,10 +78,10 @@ It defaults to `5000` (milliseconds) and can be any value lower than `60000`(mil
 Anything beyond the limit will result in an error response from Binance server.
 
 ```python
-from binance.futures import Futures as Client
+from binance.cm_futures import CMFutures
 
-client = Client(key, secret)
-response = client.query_order('BTCUSDT', orderId=11, recvWindow=10000)
+cm_futures_client = CMFutures(key='<api_key>', secret='<api_secret>')
+response = cm_futures_client.query_order('BTCUSDT', orderId=11, recvWindow=10000)
 ```
 
 ### Timeout
@@ -91,20 +91,20 @@ Please remember the value as it won't be shown in error message _no bytes have b
 By default, `timeout` is None. Hence, requests do not time out.
 
 ```python
-from binance.futures import Futures as Client
+from binance.cm_futures import CMFutures
 
-client= Client(timeout=1)
+client= CMFutures(timeout=1)
 ```
 
 ### Proxy
 proxy is supported
 
 ```python
-from binance.futures import Futures as Client
+from binance.cm_futures import CMFutures
 
 proxies = { 'https': 'http://1.2.3.4:8080' }
 
-client= Client(proxies=proxies)
+client= CMFutures(proxies=proxies)
 ```
 
 ### Response Metadata
@@ -113,15 +113,15 @@ The Binance API server provides weight usages in the headers of each response.
 You can display them by initializing the client with `show_limit_usage=True`:
 
 ```python
-from binance.futures import Futures as Client
+from binance.cm_futures import CMFutures
 
-client = Client(show_limit_usage=True)
+client = CMFutures(show_limit_usage=True)
 print(client.time())
 ```
 returns:
 
 ```python
-{'data': {'serverTime': 1587990847650}, 'limit_usage': {'x-mbx-used-weight': '31', 'x-mbx-used-weight-1m': '31'}}
+{'limit_usage': {'x-mbx-used-weight-1m': '1'}, 'data': {'serverTime': 1653563092778}}
 ```
 You can also display full response metadata to help in debugging:
 
@@ -158,12 +158,13 @@ There are 2 types of error returned from the library:
 ## Websocket
 
 ```python
-from binance.websocket.futures.websocket_client import FuturesWebsocketClient as WebsocketClient
+import time
+from binance.websocket.cm_futures.websocket_client import CMFuturesWebsocketClient
 
 def message_handler(message):
     print(message)
 
-ws_client = WebsocketClient()
+ws_client = CMFuturesWebsocketClient()
 ws_client.start()
 
 ws_client.mini_ticker(
@@ -178,7 +179,11 @@ ws_client.instant_subscribe(
     callback=message_handler,
 )
 
+time.sleep(10)
+
+print("closing ws connection")
 ws_client.stop()
+
 ```
 More websocket examples are available in the `examples` folder
 
@@ -187,3 +192,5 @@ More websocket examples are available in the `examples` folder
 Once connected, the websocket server sends a ping frame every 3 minutes and requires a response pong frame back within
 a 10 minutes period. This package handles the pong responses automatically.
 
+## License
+MIT

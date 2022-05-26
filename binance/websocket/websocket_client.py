@@ -24,13 +24,11 @@ class BinanceWebsocketClient(BinanceSocketManager):
     def live_subscribe(self, stream, id, callback, **kwargs):
         """live subscribe websocket
         Connect to the server
-        - SPOT: wss://stream.binance.com:9443/ws
-        - SPOT testnet: wss://testnet.binance.vision/ws
-        - FUTURES: wss://fstream.binance.com/ws
-        - FUTURES testnet: wss://stream.binancefuture.com/ws
-        - DELIVERY: wss://dstream.binance.com/ws
-        - DELIVERY testnet: wss://dstream.binancefuture.com/ws
-        
+        - UM Futures: wss://fstream.binance.com/ws
+        - UM Futures testnet: wss://stream.binancefuture.com/ws
+        - CM Futures: wss://dstream.binance.com/ws
+        - CM Futures testnet: wss://dstream.binancefuture.com/ws
+
         and sending the subscribe message, e.g.
 
         {"method": "SUBSCRIBE","params":["btcusdt@miniTicker"],"id": 100}
@@ -53,8 +51,8 @@ class BinanceWebsocketClient(BinanceSocketManager):
 
     def instant_subscribe(self, stream, callback, **kwargs):
         """Instant subscribe, e.g.
-        wss://stream.binance.com:9443/ws/btcusdt@bookTicker
-        wss://stream.binance.com:9443/stream?streams=btcusdt@bookTicker/bnbusdt@bookTicker
+        wss://fstream.binance.com/ws/btcusdt@bookTicker
+        wss://fstream.binance.com/stream?streams=btcusdt@bookTicker/bnbusdt@bookTicker
 
         """
         combined = False
