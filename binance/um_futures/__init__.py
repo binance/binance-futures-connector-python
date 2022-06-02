@@ -64,6 +64,8 @@ class UMFutures(API):
     from binance.um_futures.account import force_orders
     from binance.um_futures.account import api_trading_status
     from binance.um_futures.account import commission_rate
+    from binance.um_futures.account import download_transactions_asyn
+    from binance.um_futures.account import aysnc_download_info
 
     # STREAMS
     from binance.um_futures.data_stream import new_listen_key
