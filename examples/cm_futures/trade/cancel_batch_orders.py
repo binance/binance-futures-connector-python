@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import logging
-from binance.delivery import Delivery as Client
+from binance.cm_futures import CMFutures as Client
 from binance.lib.utils import config_logging
 from binance.error import ClientError
 
