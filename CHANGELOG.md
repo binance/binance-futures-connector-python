@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.1 - 2022-06-02
+
+### Update
+- Fix import path error in example files
+
 ## 3.1.0 - 2022-06-02
 
 ### Add
