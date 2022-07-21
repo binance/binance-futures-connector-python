@@ -159,12 +159,12 @@ There are 2 types of error returned from the library:
 
 ```python
 import time
-from binance.websocket.cm_futures.websocket_client import CMFuturesWebsocketClient
+from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
 
 def message_handler(message):
     print(message)
 
-ws_client = CMFuturesWebsocketClient()
+ws_client = UMFuturesWebsocketClient()
 ws_client.start()
 
 ws_client.mini_ticker(
