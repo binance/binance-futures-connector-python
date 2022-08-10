@@ -304,7 +304,7 @@ def cancel_open_orders(self, symbol: str, **kwargs):
 
 
 def cancel_batch_order(
-    self, symbol: str, orderIdList: list, origClientOrderIdList: list, **kwargs
+    self, symbol: str, orderIdList: list = None, origClientOrderIdList: list = None, **kwargs
 ):
     """
     |
@@ -324,27 +324,12 @@ def cancel_batch_order(
     |
     """
 
+    if orderIdList is not None:
+        params = {"symbol": symbol, "orderIdList": orderIdList}
+    elif origClientOrderIdList is not None:
+        params = {"symbol": symbol, "origClientOrderIdList": origClientOrderIdList}
     url_path = "/fapi/v1/batchOrders"
-    params = {}
-
-    if (orderIdList is None) and (origClientOrderIdList is None):
-        check_required_parameters(
-            [
-                [symbol, "symbol"],
-                [orderIdList, "orderIdList"],
-                [origClientOrderIdList, "origClientOrderIdList"],
-            ]
-        )
-    elif orderIdList:
-        params = {"symbol": symbol, "orderIdList": orderIdList, **kwargs}
-    else:
-        params = {
-            "symbol": symbol,
-            "origClientOrderIdList": origClientOrderIdList,
-            **kwargs,
-        }
-
-    return self.sign_request("DELETE", url_path, params)
+    return self.sign_request("DELETE", url_path, params, True)
 
 
 def countdown_cancel_order(self, symbol: str, countdownTime: int, **kwargs):
