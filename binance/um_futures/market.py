@@ -221,7 +221,7 @@ def mark_price_klines(self, symbol: str, interval: str, **kwargs):
     return self.query("/fapi/v1/markPriceKlines", params)
 
 
-def mark_price(self, symbol: str):
+def mark_price(self, symbol: str=None):
     """
     |
     | **Mark Price and Funding Rate**
@@ -233,7 +233,7 @@ def mark_price(self, symbol: str):
     |
     """
 
-    check_required_parameter(symbol, "symbol")
+    # check_required_parameter(symbol, "symbol")
     params = {
         "symbol": symbol,
     }
