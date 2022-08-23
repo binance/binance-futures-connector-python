@@ -1,5 +1,10 @@
 # Changelog
 
+### 3.1.2 - 2022-08-23
+
+### Update
+- Fix encoding issue of parameters in `DELETE /fapi/v1/batchOrders`
+
 ## 3.1.1 - 2022-06-02
 
 ### Update

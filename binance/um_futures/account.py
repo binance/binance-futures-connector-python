@@ -1,4 +1,4 @@
-from binance.lib.utils import check_required_parameter
+from binance.lib.utils import check_required_parameter, convert_list_to_json_array
 from binance.lib.utils import check_required_parameters
 
 
@@ -336,11 +336,15 @@ def cancel_batch_order(
             ]
         )
     elif orderIdList:
-        params = {"symbol": symbol, "orderIdList": orderIdList, **kwargs}
+        params = {
+            "symbol": symbol,
+            "orderIdList": convert_list_to_json_array(orderIdList),
+            **kwargs,
+        }
     else:
         params = {
             "symbol": symbol,
-            "origClientOrderIdList": origClientOrderIdList,
+            "origClientOrderIdList": convert_list_to_json_array(origClientOrderIdList),
             **kwargs,
         }
 
