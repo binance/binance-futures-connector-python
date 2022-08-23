@@ -179,7 +179,7 @@ def modify_batch_order(self, batchOrders: list):
     params = {"batchOrders": batchOrders}
     url_path = "/dapi/v1/batchOrders"
 
-    return self.sign_request("PUT", url_path, params)
+    return self.sign_request("PUT", url_path, params,True)
 
 
 def order_modify_history(
@@ -357,7 +357,7 @@ def cancel_batch_order(
             **kwargs,
         }
 
-    return self.sign_request("DELETE", url_path, params)
+    return self.sign_request("DELETE", url_path, params,True)
 
 
 def countdown_cancel_order(self, symbol: str, countdownTime: int, **kwargs):
