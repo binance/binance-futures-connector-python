@@ -13,7 +13,7 @@ um_futures_client = UMFutures(key=key, secret=secret)
 
 try:
     response = um_futures_client.cancel_batch_order(
-        symbol="BTCUSDT", orderIdList=[1234567, 2345678], recvWindow=2000
+        symbol="BTCUSDT", orderIdList=[], origClientOrderIdList=[], recvWindow=2000
     )
     logging.info(response)
 except ClientError as error:

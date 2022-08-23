@@ -18,8 +18,16 @@ params = [
         "type": "LIMIT",
         "quantity": "0.001",
         "timeInForce": "GTC",
-        "price": "60000.1",
-    }
+        "price": "10000.1",
+    },
+    {
+        "symbol": "BTCUSDT",
+        "side": "BUY",
+        "type": "LIMIT",
+        "quantity": "0.01",
+        "timeInForce": "GTC",
+        "price": "8000.1",
+    },
 ]
 
 try:
