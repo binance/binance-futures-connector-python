@@ -66,3 +66,6 @@ class CMFutures(API):
     from binance.cm_futures.data_stream import new_listen_key
     from binance.cm_futures.data_stream import renew_listen_key
     from binance.cm_futures.data_stream import close_listen_key
+
+    # PORTFOLIO MARGIN
+    from binance.cm_futures.portfolio_margin import pm_exchange_info
