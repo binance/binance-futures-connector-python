@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.2.0 - TBC
+## 3.2.0 - 2022-08-29
 
 ### Add
 #### UM Futures
