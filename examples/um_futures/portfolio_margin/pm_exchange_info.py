@@ -7,4 +7,4 @@ config_logging(logging, logging.DEBUG)
 
 um_futures_client = UMFutures()
 
-logging.info(um_futures_client.mark_price())
+logging.info(um_futures_client.pm_exchange_info())

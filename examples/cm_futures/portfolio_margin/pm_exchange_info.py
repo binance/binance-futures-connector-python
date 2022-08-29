@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import logging
-from binance.um_futures import UMFutures
+from binance.cm_futures import CMFutures
 from binance.lib.utils import config_logging
 
 config_logging(logging, logging.DEBUG)
 
-um_futures_client = UMFutures()
+cm_futures_client = CMFutures()
 
-logging.info(um_futures_client.mark_price())
+logging.info(cm_futures_client.pm_exchange_info())

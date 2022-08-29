@@ -1,6 +1,18 @@
 # Changelog
 
-### 3.1.2 - 2022-08-23
+## 3.2.0 - 2022-08-29
+
+### Add
+#### UM Futures
+ - New endpoint `GET /fapi/v1/pmExchangeInfo` to get current Portfolio Margin exchange trading rules.
+#### CM Futures
+ - New endpoint `GET /dapi/v1/pmExchangeInfo` to get current Portfolio Margin exchange trading rules.
+
+### Update
+#### UM Futures
+ - `symbol` is no longer a required parameter in `GET /fapi/v1/premiumIndex`
+
+## 3.1.2 - 2022-08-23
 
 ### Update
 - Fix encoding issue of parameters in `DELETE /fapi/v1/batchOrders`
