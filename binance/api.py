@@ -155,7 +155,7 @@ class API(object):
             "DELETE": self.session.delete,
             "PUT": self.session.put,
             "POST": self.session.post,
-        }.get(http_method, "GET")
+        }.get(http_method, self.session.get)
 
     def _handle_exception(self, response):
         status_code = response.status_code
