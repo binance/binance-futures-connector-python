@@ -1,9 +1,6 @@
-import hmac
 import json
 import logging
-import hashlib
 from json import JSONDecodeError
-
 import requests
 from .__version__ import __version__
 from binance.error import ClientError, ServerError
@@ -11,6 +8,7 @@ from binance.lib.utils import get_timestamp
 from binance.lib.utils import cleanNoneValue
 from binance.lib.utils import encoded_string
 from binance.lib.utils import check_required_parameter
+from binance.lib.authentication import hmac_hashing, rsa_signature
 
 
 class API(object):
@@ -33,6 +31,8 @@ class API(object):
         proxies=None,
         show_limit_usage=False,
         show_header=False,
+        private_key=None,
+        private_key_passphrase=None,
     ):
         self.key = key
         self.secret = secret
@@ -40,6 +40,8 @@ class API(object):
         self.show_limit_usage = False
         self.show_header = False
         self.proxies = None
+        self.private_key = private_key
+        self.private_key_pass = private_key_passphrase
         self.session = requests.Session()
         self.session.headers.update(
             {
@@ -77,8 +79,7 @@ class API(object):
             payload = {}
         payload["timestamp"] = get_timestamp()
         query_string = self._prepare_params(payload, special)
-        signature = self._get_sign(query_string)
-        payload["signature"] = signature
+        payload["signature"] = self._get_sign(query_string)
         return self.send_request(http_method, url_path, payload, special)
 
     def limited_encoded_sign_request(self, http_method, url_path, payload=None):
@@ -94,8 +95,9 @@ class API(object):
             payload = {}
         payload["timestamp"] = get_timestamp()
         query_string = self._prepare_params(payload)
-        signature = self._get_sign(query_string)
-        url_path = url_path + "?" + query_string + "&signature=" + signature
+        url_path = (
+            url_path + "?" + query_string + "&signature=" + self._get_sign(query_string)
+        )
         return self.send_request(http_method, url_path)
 
     def send_request(self, http_method, url_path, payload=None, special=False):
@@ -145,9 +147,10 @@ class API(object):
     def _prepare_params(self, params, special=False):
         return encoded_string(cleanNoneValue(params), special)
 
-    def _get_sign(self, data):
-        m = hmac.new(self.secret.encode("utf-8"), data.encode("utf-8"), hashlib.sha256)
-        return m.hexdigest()
+    def _get_sign(self, payload):
+        if self.private_key:
+            return rsa_signature(self.private_key, payload, self.private_key_pass)
+        return hmac_hashing(self.secret, payload)
 
     def _dispatch_request(self, http_method):
         return {
