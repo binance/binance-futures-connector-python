@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.3.0 - 2023-01-11
+
+### Add
+- RSA Key support
+
+### Remove
+- Python 3.6 Support Deprecated
+
 ## 3.2.0 - 2022-08-29
 
 ### Add

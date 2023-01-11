@@ -1,5 +1,5 @@
 # Binance Futures Public API Connector Python
-[![Python 3.6](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python version](https://img.shields.io/pypi/pyversions/binance-futures-connector)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a lightweight library that works as a connector to [Binance Futures public API](https://binance-docs.github.io/apidocs/futures/en/)
@@ -51,6 +51,25 @@ response = cm_futures_client.new_order(**params)
 print(response)
 ```
 Please find `examples` folder to check for more endpoints.
+
+## Authentication
+Binance supports HMAC and RSA API authentication.
+
+```python
+# HMAC Authentication
+client = Client(api_key, api_secret)
+print(client.account())
+
+# RSA Authentication
+key = ""
+with open("/Users/john/private_key.pem", "r") as f: # Location of private key file
+    private_key = f.read()
+private_key_passphrase = "" # Optional: only used for encrypted RSA key
+
+client = Client(key=key, private_key=private_key, private_key_passphrase=private_key_passphrase)
+print(client.account())
+```
+Please see `examples/um_futures/trade/get_account.py` or `examples/cm_futures/trade/get_account.py` for more details.
 
 ### Base URL
 
@@ -151,7 +170,7 @@ There are 2 types of error returned from the library:
         - `status_code` - HTTP status code
         - `error_code` - Server's error code, e.g. `-1102`
         - `error_message` - Server's error message, e.g. `Unknown order sent.`
-        - `header` - Full response header. 
+        - `header` - Full response header.
 - `binance.error.ServerError`
     - This is thrown when server returns `5XX`, it's an issue from server side.
 
