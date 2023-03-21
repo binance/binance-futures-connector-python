@@ -5,7 +5,6 @@ from binance.websocket.binance_client_protocol import BinanceClientProtocol
 
 
 class BinanceReconnectingClientFactory(ReconnectingClientFactory):
-
     initialDelay = 0.1
     maxDelay = 10
     maxRetries = 10
