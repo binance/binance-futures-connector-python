@@ -12,9 +12,7 @@ secret = ""
 um_futures_client = UMFutures(key=key, secret=secret)
 
 try:
-    response = um_futures_client.get_open_orders(
-        symbol="BTCUSDT", orderId=35298599362, recvWindow=2000
-    )
+    response = um_futures_client.get_orders(symbol="BTCUSDT", recvWindow=2000)
     logging.info(response)
 except ClientError as error:
     logging.error(
