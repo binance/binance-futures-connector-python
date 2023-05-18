@@ -1,33 +1,30 @@
 #!/usr/bin/env python
 
-import time
 import logging
+import time
 from binance.lib.utils import config_logging
 from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
 
 config_logging(logging, logging.DEBUG)
 
 
-def message_handler(message):
-    print(message)
+def message_handler(_, message):
+    logging.info(message)
 
 
-my_client = UMFuturesWebsocketClient()
-my_client.start()
+my_client = UMFuturesWebsocketClient(on_message=message_handler, is_combined=True)
 
+# Subscribe to a single symbol stream
+my_client.agg_trade(symbol="bnbusdt")
+
+time.sleep(5)
+
+# Unsubscribe
 my_client.agg_trade(
-    symbol="btcusdt",
-    id=1,
-    callback=message_handler,
+    symbol="bnbusdt", action=UMFuturesWebsocketClient.ACTION_UNSUBSCRIBE
 )
 
-time.sleep(10)
+time.sleep(5)
 
-my_client.agg_trade(
-    symbol="ethusdt",
-    id=1,
-    callback=message_handler,
-)
-
-logging.debug("closing ws connection")
+logging.info("closing ws connection")
 my_client.stop()

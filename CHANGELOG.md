@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0rc1 - 2023-05-18
+
+### Changed
+- Redesign of Websocket part. Please consult `README.md` for details on its new usage.
+
 ## 3.3.1 - 2023-03-21
 
 ### Updated

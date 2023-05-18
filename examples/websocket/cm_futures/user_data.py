@@ -9,7 +9,7 @@ from binance.websocket.cm_futures.websocket_client import CMFuturesWebsocketClie
 config_logging(logging, logging.DEBUG)
 
 
-def message_handler(message):
+def message_handler(_, message):
     print(message)
 
 
@@ -19,13 +19,11 @@ response = client.new_listen_key()
 
 logging.info("Listen key : {}".format(response["listenKey"]))
 
-ws_client = CMFuturesWebsocketClient()
-ws_client.start()
+ws_client = CMFuturesWebsocketClient(on_message=message_handler)
 
 ws_client.user_data(
     listen_key=response["listenKey"],
     id=1,
-    callback=message_handler,
 )
 
 time.sleep(30)
