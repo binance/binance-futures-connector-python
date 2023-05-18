@@ -176,35 +176,65 @@ There are 2 types of error returned from the library:
 
 ## Websocket
 
+### Connector v4
+
+WebSocket can be established through the following connections:
+- USD-M WebSocket Stream (`https://binance-docs.github.io/apidocs/futures/en/#websocket-market-streams`)
+- COIN-M WebSocket Stream (`https://binance-docs.github.io/apidocs/delivery/en/#websocket-market-streams`)
+
+```python
+# WebSocket Stream Client
+import time
+from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
+
+def message_handler(_, message):
+    logging.info(message)
+
+my_client = UMFuturesWebsocketClient(on_message=message_handler)
+
+# Subscribe to a single symbol stream
+my_client.agg_trade(symbol="bnbusdt")
+time.sleep(5)
+logging.info("closing ws connection")
+my_client.stop()
+```
+
+#### Request Id
+
+Client can assign a request id to each request. The request id will be returned in the response message. Not mandatory in the library, it generates a uuid format string if not provided.
+
+```python
+# id provided by client
+my_client.agg_trade(symbol="bnbusdt", id="my_request_id")
+
+# library will generate a random uuid string
+my_client.agg_trade(symbol="bnbusdt")
+```
+
+#### Combined Streams
+- If you set `is_combined` to `True`, `"/stream/"` will be appended to the `baseURL` to allow for Combining streams.
+- `is_combined` defaults to `False` and `"/ws/"` (raw streams) will be appended to the `baseURL`.
+
+More websocket examples are available in the `examples` folder
+
+## Websocket < v4
+
 ```python
 import time
-from binance.websocket.cm_futures.websocket_client import CMFuturesWebsocketClient
+from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
 
 def message_handler(message):
     print(message)
 
-ws_client = CMFuturesWebsocketClient()
-ws_client.start()
+my_client = UMFuturesWebsocketClient(on_message=message_handler)
 
-ws_client.mini_ticker(
-    symbol='bnbusdt',
-    id=1,
-    callback=message_handler,
-)
-
-# Combine selected streams
-ws_client.instant_subscribe(
-    stream=['bnbusdt@bookTicker', 'ethusdt@bookTicker'],
-    callback=message_handler,
-)
-
-time.sleep(10)
-
+# Subscribe to a single symbol stream
+my_client.agg_trade(symbol="bnbusdt")
+time.sleep(5)
 print("closing ws connection")
-ws_client.stop()
+my_client.stop()
 
 ```
-More websocket examples are available in the `examples` folder
 
 ### Heartbeat
 

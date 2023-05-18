@@ -12,15 +12,13 @@ def message_handler(message):
     print(message)
 
 
-my_client = UMFuturesWebsocketClient()
-my_client.start()
+my_client = UMFuturesWebsocketClient(on_message=message_handler)
 
 my_client.partial_book_depth(
     symbol="bnbusdt",
     id=1,
     level=10,
     speed=100,
-    callback=message_handler,
 )
 
 time.sleep(10)

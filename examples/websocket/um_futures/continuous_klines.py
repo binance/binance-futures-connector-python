@@ -8,19 +8,17 @@ from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClie
 config_logging(logging, logging.DEBUG)
 
 
-def message_handler(message):
+def message_handler(_, message):
     print(message)
 
 
-my_client = UMFuturesWebsocketClient()
-my_client.start()
+my_client = UMFuturesWebsocketClient(on_message=message_handler)
 
 my_client.continuous_kline(
     pair="btcusdt",
     id=1,
     contractType="perpetual",
     interval="1d",
-    callback=message_handler,
 )
 
 time.sleep(10)
