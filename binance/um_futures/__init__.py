@@ -41,6 +41,7 @@ class UMFutures(API):
     from binance.um_futures.account import get_multi_asset_mode
     from binance.um_futures.account import new_order
     from binance.um_futures.account import new_order_test
+    from binance.um_futures.account import modify_order
     from binance.um_futures.account import new_batch_order
     from binance.um_futures.account import query_order
     from binance.um_futures.account import cancel_order

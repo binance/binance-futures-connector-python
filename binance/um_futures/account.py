@@ -148,6 +148,68 @@ def new_order_test(self, symbol: str, side: str, type: str, **kwargs):
     return self.sign_request("POST", url_path, params)
 
 
+def modify_order(
+    self,
+    symbol: str,
+    side: str,
+    quantity: float,
+    price: float,
+    orderId: int = None,
+    origClientOrderId: str = None,
+    **kwargs
+):
+    """
+    |
+    | **Modify Order (TRADE)**
+    | *Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue*
+
+    :API endpoint: ``PUT /fapi/v1/order``
+    :API doc: https://binance-docs.github.io/apidocs/futures/en/#modify-order-trade
+
+    :parameter symbol: string
+    :parameter side: string
+    :parameter quantity: float
+    :parameter price: float
+    :parameter orderId: optional int
+    :parameter origClientOrderId: optional string. Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
+    :parameter recvWindow: optional int
+    |
+    """
+    check_required_parameters(
+        [
+            [symbol, "symbol"],
+            [side, "side"],
+            [quantity, "quantity"],
+            [price, "price"],
+        ]
+    )
+    if (orderId is None) and (origClientOrderId is None):
+        check_required_parameters(
+            [
+                [orderId, "orderId"],
+            ]
+        )
+    elif orderId:
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "quantity": quantity,
+            "orderId": orderId,
+            **kwargs,
+        }
+    else:
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "quantity": quantity,
+            "origClientOrderId": origClientOrderId,
+            **kwargs,
+        }
+
+    url_path = "/fapi/v1/order"
+    return self.sign_request("PUT", url_path, params)
+
+
 def new_batch_order(self, batchOrders: list):
     """
     |
