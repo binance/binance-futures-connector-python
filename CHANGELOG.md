@@ -5,6 +5,9 @@
 ### Changed
 - Change `User-Agent`
 
+### Updated 
+- Fixed `modify_order` (`PUT /fapi/v1/order`) Endpoint by correctly adding the `price` parameter 
+
 ## 4.0.0rc2 - 2023-05-25
 
 ### Added
