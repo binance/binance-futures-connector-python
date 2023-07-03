@@ -46,7 +46,7 @@ class API(object):
         self.session.headers.update(
             {
                 "Content-Type": "application/json;charset=utf-8",
-                "User-Agent": "binance-connector/" + __version__,
+                "User-Agent": "binance-futures-connector-python/" + __version__,
                 "X-MBX-APIKEY": key,
             }
         )
