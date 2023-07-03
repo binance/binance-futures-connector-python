@@ -195,6 +195,7 @@ def modify_order(
             "side": side,
             "quantity": quantity,
             "orderId": orderId,
+            "price": price,
             **kwargs,
         }
     else:
@@ -203,6 +204,7 @@ def modify_order(
             "side": side,
             "quantity": quantity,
             "origClientOrderId": origClientOrderId,
+            "price": price,
             **kwargs,
         }
 
