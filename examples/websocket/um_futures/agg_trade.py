@@ -12,7 +12,8 @@ def message_handler(_, message):
     logging.info(message)
 
 
-my_client = UMFuturesWebsocketClient(on_message=message_handler, is_combined=True)
+proxy = {'host': '192.168.5.121', 'port': 7890}
+my_client = UMFuturesWebsocketClient(on_message=message_handler, is_combined=True, proxy=proxy)
 
 # Subscribe to a single symbol stream
 my_client.agg_trade(symbol="bnbusdt")

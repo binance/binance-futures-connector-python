@@ -19,6 +19,7 @@ class BinanceSocketManager(threading.Thread):
         on_ping=None,
         on_pong=None,
         logger=None,
+        proxy=None,
     ):
         threading.Thread.__init__(self)
         if not logger:
@@ -31,13 +32,17 @@ class BinanceSocketManager(threading.Thread):
         self.on_ping = on_ping
         self.on_pong = on_pong
         self.on_error = on_error
+        self.proxy = proxy
         self.create_ws_connection()
 
     def create_ws_connection(self):
         self.logger.debug(
             "Creating connection with WebSocket Server: %s", self.stream_url
         )
-        self.ws = create_connection(self.stream_url)
+        if self.proxy is not None:
+            self.ws = create_connection(self.stream_url, http_proxy_host=self.proxy["host"], http_proxy_port=self.proxy["port"])
+        else:
+            self.ws = create_connection(self.stream_url)
         self.logger.debug(
             "WebSocket connection has been established: %s", self.stream_url
         )
