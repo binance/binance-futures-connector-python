@@ -1,5 +1,8 @@
+from typing import Optional
+
 import json
 import logging
+
 from binance.lib.utils import get_timestamp
 from binance.websocket.binance_socket_manager import BinanceSocketManager
 
@@ -18,6 +21,7 @@ class BinanceWebsocketClient:
         on_ping=None,
         on_pong=None,
         logger=None,
+        proxies: Optional[dict] = None,
     ):
         if not logger:
             logger = logging.getLogger(__name__)
@@ -31,6 +35,7 @@ class BinanceWebsocketClient:
             on_ping,
             on_pong,
             logger,
+            proxies,
         )
 
         # start the thread
@@ -47,6 +52,7 @@ class BinanceWebsocketClient:
         on_ping,
         on_pong,
         logger,
+        proxies,
     ):
         return BinanceSocketManager(
             stream_url,
@@ -57,6 +63,7 @@ class BinanceWebsocketClient:
             on_ping=on_ping,
             on_pong=on_pong,
             logger=logger,
+            proxies=proxies,
         )
 
     def _single_stream(self, stream):

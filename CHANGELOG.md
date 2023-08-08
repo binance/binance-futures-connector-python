@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0 - 2023-08-08
+
+### Changed
+- Add proxy support for websockets
+- Remove support for Python 3.7
+
 ## 4.0.0rc3 - 2023-07-03
 
 ### Changed

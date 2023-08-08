@@ -210,6 +210,47 @@ my_client.agg_trade(symbol="bnbusdt", id="my_request_id")
 # library will generate a random uuid string
 my_client.agg_trade(symbol="bnbusdt")
 ```
+#### Proxy
+
+Proxy is supported for both WebSocket CM futures and UM futures.
+
+To use it, pass in the `proxies` parameter when initializing the client.
+
+The format of the `proxies` parameter is the same as the one used in the Spot RESTful API.
+
+It consists on a dictionary with the following format, where the key is the type of the proxy and the value is the proxy URL:
+
+For websockets, the proxy type is `http`.
+
+```python
+proxies = { 'http': 'http://1.2.3.4:8080' }
+```
+
+You can also use authentication for the proxy by adding the `username` and `password` parameters to the proxy URL:
+
+```python
+proxies = { 'http': 'http://username:password@host:port' }
+```
+
+```python
+# WebSocket Stream Client
+import time
+from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
+
+proxies = {'http': 'http://1.2.3.4:8080'}
+
+def message_handler(_, message):
+    logging.info(message)
+
+my_client = UMFuturesWebsocketClient(on_message=message_handler, proxies=proxies)
+
+# Subscribe to a single symbol stream
+my_client.agg_trade(symbol="bnbusdt")
+time.sleep(5)
+logging.info("closing ws connection")
+my_client.stop()
+```
+
 
 #### Combined Streams
 - If you set `is_combined` to `True`, `"/stream/"` will be appended to the `baseURL` to allow for Combining streams.
