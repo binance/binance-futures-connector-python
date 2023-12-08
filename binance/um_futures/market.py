@@ -270,7 +270,7 @@ def ticker_24hr_price_change(self, symbol: str = None):
     | *Careful when accessing this with no symbol.*
     | *If the symbol is not sent, tickers for all symbols will be returned in an array.*
 
-    :API endpoint: ``GET /fapi/v1/ticker/24hr``
+    :API endpoint: ``GET /fapi/v2/ticker/24hr``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#24hr-ticker-price-change-statistics
 
     :parameter symbol: string; the trading symbol.
@@ -280,7 +280,7 @@ def ticker_24hr_price_change(self, symbol: str = None):
     params = {
         "symbol": symbol,
     }
-    return self.query("/fapi/v1/ticker/24hr", params)
+    return self.query("/fapi/v2/ticker/24hr", params)
 
 
 def ticker_price(self, symbol: str = None):
@@ -288,7 +288,7 @@ def ticker_price(self, symbol: str = None):
     |
     | **Latest price for a symbol or symbols.**
 
-    :API endpoint: ``GET /fapi/v1/ticker/price``
+    :API endpoint: ``GET /fapi/v2/ticker/price``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#symbol-price-ticker
 
     :parameter symbol: optional string; the trading symbol.
@@ -301,7 +301,7 @@ def ticker_price(self, symbol: str = None):
     params = {
         "symbol": symbol,
     }
-    return self.query("/fapi/v1/ticker/price", params)
+    return self.query("/fapi/v2/ticker/price", params)
 
 
 def book_ticker(self, symbol: str = None):
@@ -309,7 +309,7 @@ def book_ticker(self, symbol: str = None):
     |
     | **Best price/qty on the order book for a symbol or symbols.**
 
-    :API endpoint: ``GET /fapi/v1/ticker/bookTicker``
+    :API endpoint: ``GET /fapi/v2/ticker/bookTicker``
     :API doc: https://binance-docs.github.io/apidocs/futures/en/#symbol-order-book-ticker
 
     :parameter symbol: optional string; the trading symbol.
@@ -322,7 +322,7 @@ def book_ticker(self, symbol: str = None):
     params = {
         "symbol": symbol,
     }
-    return self.query("/fapi/v1/ticker/bookTicker", params)
+    return self.query("/fapi/v2/ticker/bookTicker", params)
 
 
 def open_interest(self, symbol: str):
