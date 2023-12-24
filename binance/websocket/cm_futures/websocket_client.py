@@ -13,6 +13,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         on_error=None,
         on_ping=None,
         on_pong=None,
+        on_disconnected=None,
         is_combined=False,
         proxies: Optional[dict] = None,
     ):
@@ -28,6 +29,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
             on_error=on_error,
             on_ping=on_ping,
             on_pong=on_pong,
+            on_disconnected=on_disconnected,
             proxies=proxies,
         )
 

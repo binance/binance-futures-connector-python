@@ -21,6 +21,7 @@ class BinanceSocketManager(threading.Thread):
         on_error=None,
         on_ping=None,
         on_pong=None,
+        on_disconnected=None,
         logger=None,
         proxies: Optional[dict] = None,
     ):
@@ -35,6 +36,7 @@ class BinanceSocketManager(threading.Thread):
         self.on_ping = on_ping
         self.on_pong = on_pong
         self.on_error = on_error
+        self.on_disconnected = on_disconnected
         self.proxies = proxies
 
         self._proxy_params = parse_proxies(proxies) if proxies else {}
@@ -69,9 +71,10 @@ class BinanceSocketManager(threading.Thread):
             except WebSocketException as e:
                 if isinstance(e, WebSocketConnectionClosedException):
                     self.logger.error("Lost websocket connection")
+                    self._callback(self.on_disconnected)
                 else:
                     self.logger.error("Websocket exception: {}".format(e))
-                raise e
+                    raise e
             except Exception as e:
                 self.logger.error("Exception in read_data: {}".format(e))
                 raise e
