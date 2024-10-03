@@ -9,7 +9,7 @@ def change_position_mode(self, dualSidePosition: str, **kwargs):
     | *Change user's position mode (Hedge Mode or One-way Mode) on EVERY symbol*
 
     :API endpoint: ``POST /fapi/v1/positionSide/dual``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#change-position-mode-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode
 
     :parameter dualSidePosition: string
     :parameter recvWindow: optional int
@@ -29,7 +29,7 @@ def get_position_mode(self, **kwargs):
     | *Get user's position mode (Hedge Mode or One-way Mode) on EVERY symbol*
 
     :API endpoint: ``GET /fapi/v1/positionSide/dual``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-current-position-mode-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode
 
     :parameter recvWindow: optional int
     |
@@ -47,7 +47,7 @@ def change_multi_asset_mode(self, multiAssetsMargin: str, **kwargs):
     | *Change user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol*
 
     :API endpoint: ``POST /fapi/v1/multiAssetsMargin``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#change-multi-assets-mode-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode
 
     :parameter multiAssetsMargin: string; "true": Multi-Assets Mode; "false": Single-Asset Mode
     :parameter recvWindow: optional int
@@ -67,7 +67,7 @@ def get_multi_asset_mode(self, **kwargs):
     | *Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol*
 
     :API endpoint: ``GET /fapi/v1/multiAssetsMargin``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-current-multi-assets-mode-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode
 
     :parameter recvWindow: optional int
     |
@@ -85,7 +85,7 @@ def new_order(self, symbol: str, side: str, type: str, **kwargs):
     | *Send a new order*
 
     :API endpoint: ``POST /fapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#new-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Order
 
     :parameter symbol: string
     :parameter side: string
@@ -120,7 +120,7 @@ def new_order_test(self, symbol: str, side: str, type: str, **kwargs):
     | *Send a new test order*
 
     :API endpoint: ``POST /fapi/v1/order/test``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#new-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Order
 
     :parameter symbol: string
     :parameter side: string
@@ -164,7 +164,7 @@ def modify_order(
     | *Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue*
 
     :API endpoint: ``PUT /fapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#modify-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order
 
     :parameter symbol: string
     :parameter side: string
@@ -219,7 +219,7 @@ def new_batch_order(self, batchOrders: list):
     | *Post a new batch order*
 
     :API endpoint: ``POST /fapi/v1/batchOrders``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#place-multiple-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders
 
     :parameter symbol: string
     :parameter side: string
@@ -286,7 +286,7 @@ def query_order(
     | *Check an order's status*
 
     :API endpoint: ``GET /fapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#query-order-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -321,7 +321,7 @@ def cancel_order(
     | *Cancel an active order.*
 
     :API endpoint: ``DELETE /fapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#cancel-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -354,7 +354,7 @@ def cancel_open_orders(self, symbol: str, **kwargs):
     | **Cancel All Open Orders (TRADE)**
 
     :API endpoint: ``DELETE /fapi/v1/allOpenOrders``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#cancel-all-open-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders
 
     :parameter symbol: string
     :parameter recvWindow: optional int; the value cannot be greater than 60000.
@@ -376,7 +376,7 @@ def cancel_batch_order(
     | *Cancel a new batch order*
 
     :API endpoint: ``DELETE /fapi/v1/batchOrders``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#cancel-multiple-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders
 
     :parameter symbol: string
     :parameter orderIdList: int list; max length 10 e.g. [1234567, 2345678]
@@ -422,7 +422,7 @@ def countdown_cancel_order(self, symbol: str, countdownTime: int, **kwargs):
     | *Cancel all open orders of the specified symbol at the end of the specified countdown.*
 
     :API endpoint: ``POST /fapi/v1/countdownCancelAll``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#auto-cancel-all-open-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders
 
     :parameter symbol: string
     :parameter countdownTime: int list; countdown time, 1000 for 1 second. 0 to cancel the timer.
@@ -454,7 +454,7 @@ def get_open_orders(
     | *Get all open orders on a symbol.*
 
     :API endpoint: ``GET /fapi/v1/openOrder``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#query-current-open-order-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -493,7 +493,7 @@ def get_orders(self, **kwargs):
     | *If the symbol is not sent, orders for all symbols will be returned in an array.*
 
     :API endpoint: ``GET /fapi/v1/openOrders``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#current-all-open-orders-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders
 
     :parameter symbol: optional string
     :parameter recvWindow: optional int; the value cannot be greater than 60000.
@@ -513,7 +513,7 @@ def get_all_orders(self, symbol: str, **kwargs):
     | *Get all account orders; active, canceled, or filled.*
 
     :API endpoint: ``GET /fapi/v1/allOrders``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#all-orders-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -538,7 +538,7 @@ def balance(self, **kwargs):
     | *Get current account balance*
 
     :API endpoint: ``GET /fapi/v2/balance``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#futures-account-balance-v2-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2
 
     :parameter recvWindow: optional int
     |
@@ -555,7 +555,7 @@ def account(self, **kwargs):
     | *Get current account information*
 
     :API endpoint: ``GET /fapi/v2/account``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#account-information-v2-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2
 
     :parameter recvWindow: optional int
     |
@@ -572,7 +572,7 @@ def change_leverage(self, symbol: str, leverage: int, **kwargs):
     | *Change user's initial leverage of specific symbol market.*
 
     :API endpoint: ``POST /fapi/v1/leverage``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#change-initial-leverage-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage
 
     :parameter symbol: string
     :parameter leverage: int; target initial leverage: int from 1 to 125.
@@ -593,7 +593,7 @@ def change_margin_type(self, symbol: str, marginType: str, **kwargs):
     | *Change user's margin type of specific symbol market.*
 
     :API endpoint: ``POST /fapi/v1/marginType``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#change-margin-type-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type
 
     :parameter symbol: string
     :parameter marginType: string; ISOLATED, CROSSED.
@@ -616,7 +616,7 @@ def modify_isolated_position_margin(
     | **Modify Isolated Position Margin (TRADE)**
 
     :API endpoint: ``POST /fapi/v1/positionMargin``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#modify-isolated-position-margin-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin
 
     :parameter symbol: string
     :parameter amount: float
@@ -639,7 +639,7 @@ def get_position_margin_history(self, symbol: str, **kwargs):
     | *Get position margin history on a symbol.*
 
     :API endpoint: ``GET /fapi/v1/positionMargin/history``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-position-margin-change-history-trade
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History
 
     :parameter symbol: string
     :parameter type: optional int; 1: Add position margin, 2: Reduce position margin.
@@ -664,7 +664,7 @@ def get_position_risk(self, **kwargs):
     | *Get current position information.*
 
     :API endpoint: ``GET /fapi/v2/positionRisk``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Information
 
     :parameter symbol: string
     :parameter recvWindow: optional int
@@ -684,7 +684,7 @@ def get_account_trades(self, symbol: str, **kwargs):
     | *Get trades for a specific account and symbol.*
 
     :API endpoint: ``GET /fapi/v1/userTrades``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List
 
     :parameter symbol: string
     :parameter startTime: optional int
@@ -714,7 +714,7 @@ def get_income_history(self, **kwargs):
     | *Get trades for a specific account and symbol.*
 
     :API endpoint: ``GET /fapi/v1/income``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-income-history-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History
 
     :parameter symbol: optional string
     :parameter incomeType: optional string; "TRANSFER", "WELCOME_BONUS", "REALIZED_PNL", "FUNDING_FEE", "COMMISSION" and "INSURANCE_CLEAR".
@@ -741,7 +741,7 @@ def leverage_brackets(self, **kwargs):
     | *Get notional and leverage bracket.*
 
     :API endpoint: ``GET /fapi/v1/leverageBracket``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#notional-and-leverage-brackets-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets
 
     :parameter symbol: optional string
     :parameter recvWindow: optional int
@@ -761,7 +761,7 @@ def adl_quantile(self, **kwargs):
     | *Get Position ADL Quantile Estimation*
 
     :API endpoint: ``GET /fapi/v1/adlQuantile``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#position-adl-quantile-estimation-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation
 
     :parameter symbol: optional string
     :parameter recvWindow: optional int
@@ -788,7 +788,7 @@ def force_orders(self, **kwargs):
     | *Get User's Force Orders*
 
     :API endpoint: ``GET /fapi/v1/forceOrders``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#user-39-s-force-orders-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders
 
     :parameter symbol: optional string
     :parameter autoCloseType: optional string; "LIQUIDATION" for liquidation orders, "ADL" for ADL orders.
@@ -816,7 +816,7 @@ def api_trading_status(self, **kwargs):
     | *Get User API Trading Quantitative Rules Indicators*
 
     :API endpoint: ``GET /fapi/v1/apiTradingStatus``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#user-api-trading-quantitative-rules-indicators-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators
 
     :parameter symbol: optional string
     :parameter recvWindow: optional int
@@ -836,7 +836,7 @@ def commission_rate(self, symbol: str, **kwargs):
     | *Get commission rate of symbol*
 
     :API endpoint: ``GET /fapi/v1/commissionRate``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#user-commission-rate-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate
 
     :parameter symbol: string
     :parameter recvWindow: optional int
@@ -856,7 +856,7 @@ def download_transactions_asyn(self, startTime: int, endTime: int, **kwargs):
     | **Get Download Id For Futures Transaction History (USER_DATA)**
 
     :API endpoint: ``GET /fapi/v1/income/asyn``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-transaction-history-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History
 
     :parameter startTime:  int
     :parameter endTime:  int
@@ -878,7 +878,7 @@ def aysnc_download_info(self, downloadId: str, **kwargs):
     | **Get Futures Transaction History Download Link by Id (USER_DATA)**
 
     :API endpoint: ``GET /fapi/v1/income/asyn/id``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#get-futures-transaction-history-download-link-by-id-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id
 
     :parameter downloadId:  string
     :parameter recvWindow: optional int

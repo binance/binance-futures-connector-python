@@ -7,7 +7,7 @@ def new_listen_key(self):
     | **Create a ListenKey (USER_STREAM)**
 
     :API endpoint: ``POST /fapi/v1/listenKey``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#start-user-data-stream-user_stream
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream
     |
     """
 
@@ -21,7 +21,7 @@ def renew_listen_key(self, listenKey: str):
     | **Ping/Keep-alive a ListenKey (USER_STREAM)**
 
     :API endpoint: ``PUT /fapi/v1/listenKey``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#keepalive-user-data-stream-user_stream
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream
 
     :parameter listenKey: string
     |
@@ -38,7 +38,7 @@ def close_listen_key(self, listenKey: str):
     | **Close a ListenKey (USER_STREAM)**
 
     :API endpoint: ``DELETE /fapi/v1/listenKey``
-    :API doc: https://binance-docs.github.io/apidocs/futures/en/#close-user-data-stream-user_stream
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream
 
     :parameter listenKey: string
     |

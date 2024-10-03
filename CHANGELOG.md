@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.1 - 2024-10-03
+
+### Removed
+- UM_Futures:
+  - `GET /v1/pmExchangeInfo`
+
 ## 4.0.0 - 2023-08-08
 
 ### Changed

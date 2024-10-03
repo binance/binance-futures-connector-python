@@ -2,7 +2,7 @@
 [![Python version](https://img.shields.io/pypi/pyversions/binance-futures-connector)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is a lightweight library that works as a connector to [Binance Futures public API](https://binance-docs.github.io/apidocs/futures/en/)
+This is a lightweight library that works as a connector to [Binance Futures public API](https://developers.binance.com/docs/derivatives/Introduction)
 
 - Supported APIs:
     - USDT-M Futures `/fapi/*`
@@ -179,8 +179,8 @@ There are 2 types of error returned from the library:
 ### Connector v4
 
 WebSocket can be established through the following connections:
-- USD-M WebSocket Stream (`https://binance-docs.github.io/apidocs/futures/en/#websocket-market-streams`)
-- COIN-M WebSocket Stream (`https://binance-docs.github.io/apidocs/delivery/en/#websocket-market-streams`)
+- USD-M WebSocket Stream (`https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Connect`)
+- COIN-M WebSocket Stream (`https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Connect`)
 
 ```python
 # WebSocket Stream Client
