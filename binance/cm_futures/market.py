@@ -9,7 +9,7 @@ def ping(self):
     | *Test connectivity to the Rest API.*
 
     :API endpoint: ``GET /dapi/v1/ping``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#test-connectivity
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Test-Connectivity
     |
     """
 
@@ -24,7 +24,7 @@ def time(self):
     | *Test connectivity to the Rest API and get the current server time.*
 
     :API endpoint: ``GET /dapi/v1/time``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#check-server-time
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Check-Server-time
     |
     """
 
@@ -39,7 +39,7 @@ def exchange_info(self):
     | *Current exchange trading rules and symbol information*
 
     :API endpoint: ``GET /dapi/v1/exchangeInfo``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#exchange-information
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Exchange-Information
     |
     """
 
@@ -53,7 +53,7 @@ def depth(self, symbol: str, **kwargs):
     | **Get Orderbook**
 
     :API endpoint: ``GET /dapi/v1/depth``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#order-book
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Order-Book
 
     :parameter symbol: string; the trading pair
     :parameter limit: optional int; limit the results. Default 500, valid limits: [5, 10, 20, 50, 100, 500, 1000].
@@ -71,7 +71,7 @@ def trades(self, symbol: str, **kwargs):
     | **Get Recent Market Trades**
 
     :API endpoint: ``GET /dapi/v1/trades``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#recent-trades-list
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Recent-Trades-List
 
     :parameter symbol: string; the trading pair
     :parameter limit: optional int; limit the results. Default 500, max 1000.
@@ -90,7 +90,7 @@ def historical_trades(self, symbol: str, **kwargs):
     | *Get older market historical trades.*
 
     :API endpoint: ``GET /dapi/v1/historicalTrades``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#old-trades-lookup-market_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Old-Trades-Lookup
 
     :parameter symbol: string; the trading pair
     :parameter limit: optional int; limit the results. Default 500, max 1000.
@@ -110,7 +110,7 @@ def agg_trades(self, symbol: str, **kwargs):
     | *Get compressed, aggregate market trades. Market trades that fill at the time, from the same order, with the same price will have the quantity aggregated.*
 
     :API endpoint: ``GET /dapi/v1/aggTrades``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#compressed-aggregate-trades-list
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Compressed-Aggregate-Trades-List
 
     :parameter symbol: string; the trading pair
     :parameter limit: optional int; limit the results. Default 500, max 1000.
@@ -132,10 +132,10 @@ def klines(self, symbol: str, interval: str, **kwargs):
     | *Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.*
 
     :API endpoint: ``GET /dapi/v1/klines``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Kline-Candlestick-Data
 
     :parameter symbol: string; the trading pair
-    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     :parameter startTime: optional int; Timestamp in ms to get aggregate trades from INCLUSIVE.
     :parameter endTime: optional int; Timestamp in ms to get aggregate trades until INCLUSIVE.
@@ -154,11 +154,11 @@ def continuous_klines(self, pair: str, contractType: str, interval: str, **kwarg
     | *Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.*
 
     :API endpoint: ``GET /dapi/v1/continuousKlines``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Continuous-Contract-Kline-Candlestick-Data
 
     :parameter pair: string; the trading pair
     :parameter contractType: string; PERPETUAL, CURRENT_MONTH, NEXT_MONTH, CURRENT_QUARTER, NEXT_QUARTER.
-    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     :parameter startTime: optional int; Timestamp in ms to get aggregate trades from INCLUSIVE.
     :parameter endTime: optional int; Timestamp in ms to get aggregate trades until INCLUSIVE.
@@ -184,10 +184,10 @@ def index_price_klines(self, pair: str, interval: str, **kwargs):
     | *Klines are uniquely identified by their open time.*
 
     :API endpoint: ``GET /dapi/v1/indexPriceKlines``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#index-price-kline-candlestick-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Index-Price-Kline-Candlestick-Data
 
     :parameter pair: string; the trading pair
-    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     :parameter startTime: optional int; Timestamp in ms to get aggregate trades from INCLUSIVE.
     :parameter endTime: optional int; Timestamp in ms to get aggregate trades until INCLUSIVE.
@@ -206,10 +206,10 @@ def mark_price_klines(self, symbol: str, interval: str, **kwargs):
     | *Klines are uniquely identified by their open time.*
 
     :API endpoint: ``GET /dapi/v1/markPriceKlines``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Mark-Price-Kline-Candlestick-Data
 
     :parameter pair: string; the trading pair
-    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 500, max 1000.
     :parameter startTime: optional int; Timestamp in ms to get aggregate trades from INCLUSIVE.
     :parameter endTime: optional int; Timestamp in ms to get aggregate trades until INCLUSIVE.
@@ -234,7 +234,7 @@ def mark_price(self, symbol: str):
     | **Mark Price and Funding Rate**
 
     :API endpoint: ``GET /dapi/v1/premiumIndex``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#index-price-and-mark-price
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Index-Price-and-Mark-Price
 
     :parameter symbol: string; the trading pair
     |
@@ -253,7 +253,7 @@ def funding_rate(self, symbol: str, **kwargs):
     | **Funding Rate History**
 
     :API endpoint: ``GET /dapi/v1/fundingRate``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#get-funding-rate-history-of-perpetual-futures
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Get-Funding-Rate-History-of-Perpetual-Futures
 
     :parameter symbol: string; the trading pair
     :parameter limit: optional int; limit the results. Default 500, max 1000.
@@ -277,7 +277,7 @@ def ticker_24hr_price_change(self, symbol: str = None, pair: str = None):
     | *If the symbol is not sent, tickers for all symbols will be returned in an array.*
 
     :API endpoint: ``GET /dapi/v1/ticker/24hr``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#24hr-ticker-price-change-statistics
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/24hr-Ticker-Price-Change-Statistics
 
     :parameter symbol: optional string; the trading symbol
     :parameter pair: optional string; the trading pair
@@ -305,7 +305,7 @@ def ticker_price(self, symbol: str = None, pair: str = None):
     | **Latest price for a symbol or symbols**
 
     :API endpoint: ``GET /dapi/v1/ticker/price``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#symbol-price-ticker
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Symbol-Price-Ticker
 
     :parameter symbol: optional string; the trading symbol
     :parameter pair: optional string; the trading pair
@@ -333,7 +333,7 @@ def book_ticker(self, symbol: str = None, pair: str = None):
     | **Best price/qty on the order book for a symbol or symbols**
 
     :API endpoint: ``GET /dapi/v1/ticker/bookTicker``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#symbol-order-book-ticker
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Symbol-Order-Book-Ticker
 
     :parameter symbol: optional string; the trading symbol
 
@@ -358,7 +358,7 @@ def open_interest(self, symbol: str):
     | **Get present open interest of a specific symbol**
 
     :API endpoint: ``GET /dapi/v1/openInterest``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#open-interest
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Open-Interest
 
     :parameter symbol: string; the trading symbol
     |
@@ -375,11 +375,11 @@ def open_interest_hist(self, pair: str, contractType: str, period: str, **kwargs
     | **Get historical open interest of a specific symbol**
 
     :API endpoint: ``GET /futures/data/openInterestHist``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#open-interest-statistics-market-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Open-Interest-Statistics
 
     :parameter pair: string; the trading pair
     :parameter contractType: string; ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL.
-    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 30, max 500.
     :parameter startTime: optional int
     :parameter endTime: optional int
@@ -403,10 +403,10 @@ def top_long_short_account_ratio(self, pair: str, period: str, **kwargs):
     | **Get top long short account ratio**
 
     :API endpoint: `GET /futures/data/topLongShortAccountRatio`
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-accounts-market-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Top-Long-Short-Account-Ratio
 
     :parameter pair: string; the trading pair
-    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 30, max 500.
     :parameter startTime: optional int
     :parameter endTime: optional int
@@ -428,10 +428,10 @@ def top_long_short_position_ratio(self, pair: str, period: str, **kwargs):
     | **Get top long short position ratio**
 
     :API endpoint: ``GET /futures/data/topLongShortPositionRatio``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-positions-market-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Top-Trader-Long-Short-Ratio
 
     :parameter pair: string; the trading pair
-    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 30, max 500.
     :parameter startTime: optional int
     :parameter endTime: optional int
@@ -453,10 +453,10 @@ def long_short_account_ratio(self, pair: str, period: str, **kwargs):
     | **Get top long short account ratio**
 
     :API endpoint: ``GET /futures/data/globalLongShortAccountRatio``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-accounts-market-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Long-Short-Ratio
 
     :parameter pair: string; the trading pair
-    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 30, max 500.
     :parameter startTime: optional int
     :parameter endTime: optional int
@@ -478,11 +478,11 @@ def taker_long_short_ratio(self, pair: str, contractType: str, period: str, **kw
     | **Get taker long short ratio**
 
     :API endpoint: ``GET /futures/data/takerBuySellVol``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#taker-buy-sell-volume-market-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Taker-Buy-Sell-Volume
 
     :parameter pair: string; the trading pair
     :parameter contractType: string; CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL.
-    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 30, max 500.
     :parameter startTime: optional int
     :parameter endTime: optional int
@@ -506,11 +506,11 @@ def basis(self, pair: str, contractType: str, period: str, **kwargs):
     | **Get Index Composite**
 
     :API endpoint: ``GET /futures/data/basis``
-    :API doc: xshttps://binance-docs.github.io/apidocs/delivery/en/#basis-market-data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Basis
 
     :parameter pair: string; the trading pair
     :parameter contractType: string; CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL.
-    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://binance-docs.github.io/apidocs/delivery/en/#public-endpoints-info)
+    :parameter period: string; the period of open interest, "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d". (see more in https://developers.binance.com/docs/derivatives/coin-margined-futures/common-definition)
     :parameter limit: optional int; limit the results. Default 30, max 500.
     :parameter startTime: optional int
     :parameter endTime: optional int

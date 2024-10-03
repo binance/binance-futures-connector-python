@@ -5,7 +5,7 @@ def pm_exchange_info(self, symbol: str = None):
     | *Current Portfolio Margin exchange trading rules.*
 
     :API endpoint: ``GET /dapi/v1/pmExchangeInfo``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#portfolio-margin-exchange-information
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints/Query-Classic-Portfolio-Margin-Notional-Limit
 
     :parameter symbol: string; the trading pair.
     |

@@ -9,7 +9,7 @@ def change_position_mode(self, dualSidePosition: str, **kwargs):
     | *Change user's position mode (Hedge Mode or One-way Mode) on EVERY symbol*
 
     :API endpoint: ``POST /dapi/v1/positionSide/dual``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#change-position-mode-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Change-Position-Mode
 
     :parameter dualSidePosition: string
     :parameter recvWindow: optional int
@@ -29,7 +29,7 @@ def get_position_mode(self, **kwargs):
     | *Get user's position mode (Hedge Mode or One-way Mode) on EVERY symbol*
 
     :API endpoint: ``GET /dapi/v1/positionSide/dual``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#get-current-position-mode-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Get-Current-Position-Mode
 
     :parameter recvWindow: optional int
     |
@@ -47,7 +47,7 @@ def new_order(self, symbol: str, side: str, type: str, **kwargs):
     | *Send a new order*
 
     :API endpoint: ``POST /dapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#new-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/New-Order
 
     :parameter symbol: string
     :parameter side: string
@@ -89,7 +89,7 @@ def modify_order(
     | *Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue.*
 
     :API endpoint: ``POST /dapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#modify-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Modify-Order
 
     :parameter symbol: string
     :parameter side: string
@@ -135,7 +135,7 @@ def new_batch_order(self, batchOrders: list):
     | *Post a new batch order*
 
     :API endpoint: ``POST /dapi/v1/batchOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#place-multiple-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Place-Multiple-Orders
 
     :parameter batchOrders: list
     :parameter recvWindow: optional int
@@ -162,7 +162,7 @@ def modify_batch_order(self, batchOrders: list):
     | *Post a new batch order*
 
     :API endpoint: ``PUT /dapi/v1/batchOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#modify-multiple-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Modify-Multiple-Orders
 
     :parameter batchOrders: list
     :parameter recvWindow: optional int
@@ -191,7 +191,7 @@ def order_modify_history(
     | *Get order modification history*
 
     :API endpoint: ``GET /dapi/v1/orderAmendment``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#get-order-modify-history-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Get-Order-Modify-History
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -231,7 +231,7 @@ def query_order(
     | *Query a order*
 
     :API endpoint: ``GET /dapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#query-order-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Query-Order
 
     :parameter symbol: string
     :parameter orderId: optional string
@@ -268,7 +268,7 @@ def cancel_order(
     | *Cancel an active order.*
 
     :API endpoint: ``DELETE /dapi/v1/order``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#cancel-order-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Cancel-Order
 
     :parameter symbol: string
     :parameter orderId: optional string
@@ -303,7 +303,7 @@ def cancel_open_orders(self, symbol: str, **kwargs):
     | **Cancel All Open Orders (TRADE)**
 
     :API endpoint: ``DELETE /dapi/v1/allOpenOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#cancel-all-open-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Cancel-All-Open-Orders
 
     :parameter symbol: string
     :parameter recvWindow: optional int, the value cannot be greater than 60000
@@ -325,7 +325,7 @@ def cancel_batch_order(
     | *Cancel a new batch order*
 
     :API endpoint: ``DELETE /dapi/v1/batchOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Cancel-Multiple-Orders
 
     :parameter symbol: string
     :parameter orderIdList: int list, max length 10 e.g. [1234567,2345678]
@@ -367,7 +367,7 @@ def countdown_cancel_order(self, symbol: str, countdownTime: int, **kwargs):
     | *Cancel all open orders of the specified symbol at the end of the specified countdown.*
 
     :API endpoint: ``POST /dapi/v1/countdownCancelAll``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#auto-cancel-all-open-orders-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Auto-Cancel-All-Open-Orders
 
     :parameter symbol: string
     :parameter countdownTime: int list, countdown time, 1000 for 1 second. 0 to cancel the timer
@@ -400,7 +400,7 @@ def get_open_orders(
     | *Get all open orders on a symbol.*
 
     :API endpoint: ``GET /dapi/v1/openOrder``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#query-current-open-order-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Query-Current-Open-Order
 
     :parameter symbol: string
     :parameter orderId: optional string
@@ -440,7 +440,7 @@ def get_orders(self, **kwargs):
     | *If the symbol is not sent, orders for all symbols will be returned in an array.*
 
     :API endpoint: ``GET /dapi/v1/openOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#current-all-open-orders-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Current-All-Open-Orders
 
     :parameter symbol: string
     :parameter recvWindow: optional int, the value cannot be greater than 60000
@@ -460,7 +460,7 @@ def get_all_orders(self, **kwargs):
     | *Get all account orders; active, canceled, or filled.*
 
     :API endpoint: ``GET /dapi/v1/allOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#all-orders-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/All-Orders
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -484,7 +484,7 @@ def balance(self, **kwargs):
     | *Get current account balance*
 
     :API endpoint: ``GET /dapi/v1/balance``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#futures-account-balance-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Futures-Account-Balance
 
     :parameter recvWindow: optional int
     |
@@ -501,7 +501,7 @@ def account(self, **kwargs):
     | *Get current account information*
 
     :API endpoint: ``GET /dapi/v1/account``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#account-information-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Account-Information
 
     :parameter recvWindow: optional int
 
@@ -523,7 +523,7 @@ def change_leverage(self, symbol: str, leverage: int, **kwargs):
     | *For Hedge Mode, LONG and SHORT positions of one symbol use the same initial leverage and share a total notional value.*
 
     :API endpoint: ``POST /dapi/v1/leverage``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#change-initial-leverage-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Change-Initial-Leverage
 
     :parameter symbol: string
     :parameter leverage: int; target initial leverage: int from 1 to 125
@@ -545,7 +545,7 @@ def change_margin_type(self, symbol: str, marginType: str, **kwargs):
     | *With ISOLATED margin type, margins of the LONG and SHORT positions are isolated from each other.*
 
     :API endpoint: ``POST /dapi/v1/marginType``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#change-margin-type-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Change-Margin-Type
 
     :parameter symbol: string
     :parameter leverage: string; ISOLATED, CROSSED
@@ -567,7 +567,7 @@ def modify_isolated_position_margin(
     | **Modify Isolated Position Margin (TRADE)**
 
     :API endpoint: ``POST /dapi/v1/positionMargin``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#modify-isolated-position-margin-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Modify-Isolated-Position-Margin
 
     :parameter symbol: string
     :parameter amount: float
@@ -590,7 +590,7 @@ def get_position_margin_history(self, symbol: str, **kwargs):
     | *Get position margin history on a symbol.*
 
     :API endpoint: ``GET /dapi/v1/positionMargin/history``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#get-position-margin-change-history-trade
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Get-Position-Margin-Change-History
 
     :parameter symbol: string
     :parameter type: optional int; 1: Add position margin，2: Reduce position margin
@@ -615,7 +615,7 @@ def get_position_risk(self, **kwargs):
     | *Get current position information.*
 
     :API endpoint: ``GET /dapi/v1/positionRisk``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#position-information-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Position-Information
 
     :parameter symbol: string
     :parameter recvWindow: optional int
@@ -635,7 +635,7 @@ def get_account_trades(self, **kwargs):
     | *Get trades for a specific account and symbol.*
 
     :API endpoint: ``GET /dapi/v1/userTrades``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#account-trade-list-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Account-Trade-List
 
     :parameter symbol: optional string
     :parameter pair: optional string
@@ -667,7 +667,7 @@ def get_income_history(self, **kwargs):
     | *Get trades for a specific account and symbol.*
 
     :API endpoint: ``GET /dapi/v1/income``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#get-income-history-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Get-Income-History
 
     :parameter symbol: optional string
     :parameter incomeType: optional string; "TRANSFER", "WELCOME_BONUS", "REALIZED_PNL", "FUNDING_FEE", "COMMISSION" and "INSURANCE_CLEAR"
@@ -695,10 +695,10 @@ def leverage_brackets(self, symbol: str = None, pair: str = None, **kwargs):
     | *Get notional and leverage bracket.*
 
     :API endpoint: ``GET /dapi/v1/leverageBracket``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#notional-bracket-for-pair-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Notional-Bracket-for-Pair
 
     :API endpoint: ``GET /dapi/v2/leverageBracket``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#notional-bracket-for-pair-user_data-2
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Notional-Bracket-for-Symbol
 
     :parameter symbol: optional string
     :parameter pair: optional string
@@ -729,7 +729,7 @@ def adl_quantile(self, **kwargs):
     | *Get Position ADL Quantile Estimation*
 
     :API endpoint: ``GET /dapi/v1/adlQuantile``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#position-adl-quantile-estimation-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Position-ADL-Quantile-Estimation
 
     :parameter symbol: optional string
     :parameter recvWindow: optional int
@@ -757,7 +757,7 @@ def force_orders(self, **kwargs):
     | *Get User's Force Orders*
 
     :API endpoint: ``GET /dapi/v1/forceOrders``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#user-39-s-force-orders-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Users-Force-Orders
 
     :parameter symbol: optional string
     :parameter autoCloseType: optional string; "LIQUIDATION" for liquidation orders, "ADL" for ADL orders.
@@ -785,7 +785,7 @@ def commission_rate(self, symbol: str, **kwargs):
     | *Get commission rate of symbol*
 
     :API endpoint: ``GET /dapi/v1/commissionRate``
-    :API doc: https://binance-docs.github.io/apidocs/delivery/en/#user-commission-rate-user_data
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/User-Commission-Rate
 
     :parameter symbol: optional string
     :parameter recvWindow: optional int
