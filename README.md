@@ -16,7 +16,8 @@ This is a lightweight library that works as a connector to [Binance Futures publ
 ## Installation
 
 ```bash
-pip install binance-futures-connector
+    (HMAC SHA256)
+    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9', pip install binance-futures-connector
 ```
 
 
@@ -24,31 +25,8 @@ pip install binance-futures-connector
 
 Usage examples:
 ```python
-
-from binance.cm_futures import CMFutures
-
-cm_futures_client = CMFutures()
-
-# get server time
-print(cm_futures_client.time())
-
-cm_futures_client = CMFutures(key='<api_key>', secret='<api_secret>')
-
-# Get account information
-print(cm_futures_client.account())
-
-# Post a new order
-params = {
-    'symbol': 'BTCUSDT',
-    'side': 'SELL',
-    'type': 'LIMIT',
-    'timeInForce': 'GTC',
-    'quantity': 0.002,
-    'price': 59808
-}
-
-response = cm_futures_client.new_order(**params)
-print(response)
+    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
+    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
 ```
 Please find `examples` folder to check for more endpoints.
 
@@ -56,18 +34,8 @@ Please find `examples` folder to check for more endpoints.
 Binance supports HMAC and RSA API authentication.
 
 ```python
-# HMAC Authentication
-client = Client(api_key, api_secret)
-print(client.account())
-
-# RSA Authentication
-key = ""
-with open("/Users/john/private_key.pem", "r") as f: # Location of private key file
-    private_key = f.read()
-private_key_passphrase = "" # Optional: only used for encrypted RSA key
-
-client = Client(key=key, private_key=private_key, private_key_passphrase=private_key_passphrase)
-print(client.account())
+(HMAC SHA256)
+    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
 ```
 Please see `examples/um_futures/trade/get_account.py` or `examples/cm_futures/trade/get_account.py` for more details.
 
@@ -140,7 +108,14 @@ print(client.time())
 returns:
 
 ```python
-{'limit_usage': {'x-mbx-used-weight-1m': '1'}, 'data': {'serverTime': 1653563092778}}
+sembol=BTCUSDT
+&side=ALIŞVERİŞ
+&type=LIMIT
+&timeInForce=GTC
+&miktar=1
+&fiyat=9000
+&recvWindow=5000
+&zaman damgası=1591702613943
 ```
 You can also display full response metadata to help in debugging:
 
@@ -152,7 +127,8 @@ print(client.time())
 returns:
 
 ```python
-{'data': {'serverTime': 1587990847650}, 'header': {'Context-Type': 'application/json;charset=utf-8', ...}}
+    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
+    (stdin)= f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2
 ```
 
 If `ClientError` is received, it'll display full response meta information.
@@ -175,7 +151,16 @@ There are 2 types of error returned from the library:
     - This is thrown when server returns `5XX`, it's an issue from server side.
 
 ## Websocket
+if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {
+  // process request
+} else {
+  // reject request
+}
+ #    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
+    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
 
+
+    
 ### Connector v4
 
 WebSocket can be established through the following connections:
@@ -183,20 +168,8 @@ WebSocket can be established through the following connections:
 - COIN-M WebSocket Stream (`https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Connect`)
 
 ```python
-# WebSocket Stream Client
-import time
-from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
-
-def message_handler(_, message):
-    logging.info(message)
-
-my_client = UMFuturesWebsocketClient(on_message=message_handler)
-
-# Subscribe to a single symbol stream
-my_client.agg_trade(symbol="bnbusdt")
-time.sleep(5)
-logging.info("closing ws connection")
-my_client.stop()
+    (HMAC SHA256)
+    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
 ```
 
 #### Request Id
@@ -204,11 +177,16 @@ my_client.stop()
 Client can assign a request id to each request. The request id will be returned in the response message. Not mandatory in the library, it generates a uuid format string if not provided.
 
 ```python
-# id provided by client
-my_client.agg_trade(symbol="bnbusdt", id="my_request_id")
+queryString: sembol=BTCUSDT&side=SATIN AL&type=LIMIT&timeInForce=GTC
+requestBody: miktar=1&fiyat=9000&alPencere=5000&zaman damgası= 1591702613943
+Örnek 3'te imzanın farklı olduğuna dikkat edin.
+"GTC" ile "quantity=1" arasında & yok.
 
-# library will generate a random uuid string
-my_client.agg_trade(symbol="bnbusdt")
+POST /fapi/v1/order için İMZALANMIŞ Uç Nokta Örnekleri - RSA 
+Bu, geçerli bir imzalı yük göndermek için imza yükünün nasıl oluşturulacağına dair adım adım bir işlem olacaktır.
+Şu anda destekliyoruz PKCS#8.
+API anahtarınızı alabilmeniz için RSA Genel Anahtarınızı hesabınıza yüklemeniz gerekmektedir; buna karşılık gelen API anahtarı size sağlanacaktır.
+Bu örnek için özel anahtar şu şekilde referans alınacaktır:test-prv-key.pem
 ```
 #### Proxy
 
@@ -229,26 +207,11 @@ proxies = { 'http': 'http://1.2.3.4:8080' }
 You can also use authentication for the proxy by adding the `username` and `password` parameters to the proxy URL:
 
 ```python
-proxies = { 'http': 'http://username:password@host:port' }
+timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23
 ```
 
 ```python
-# WebSocket Stream Client
-import time
-from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
-
-proxies = {'http': 'http://1.2.3.4:8080'}
-
-def message_handler(_, message):
-    logging.info(message)
-
-my_client = UMFuturesWebsocketClient(on_message=message_handler, proxies=proxies)
-
-# Subscribe to a single symbol stream
-my_client.agg_trade(symbol="bnbusdt")
-time.sleep(5)
-logging.info("closing ws connection")
-my_client.stop()
+ $ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
 ```
 
 
@@ -261,20 +224,8 @@ More websocket examples are available in the `examples` folder
 ## Websocket < v4
 
 ```python
-import time
-from binance.websocket.um_futures.websocket_client import UMFuturesWebsocketClient
-
-def message_handler(message):
-    print(message)
-
-my_client = UMFuturesWebsocketClient(on_message=message_handler)
-
-# Subscribe to a single symbol stream
-my_client.agg_trade(symbol="bnbusdt")
-time.sleep(5)
-print("closing ws connection")
-my_client.stop()
-
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 ### Heartbeat
