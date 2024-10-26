@@ -1,0 +1,208 @@
+diff --git a/README.md b/README.md
+dizin 74cbe89..3b56846 100644
+--- a/README.md
++++ b/README.md
+@@ -16,7 +16,8 @@ Bu, [Binance Futures publ] için bir bağlayıcı olarak çalışan hafif bir kütüphanedir.
+ ## Kurulum
+ 
+ ```vurmak
+-pip binance-futures-connector'ı kurun
++ (HMAC SHA256)
++ $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order?symbol=BTCUSDT&side=ALIŞVERİŞ&tür=SINIR&miktar=1&fiyat=9000&timeInForce=GTC&recvWindow=5000×tamp=1591702613943&imza=3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9', pip install binance-vadeli-işlemler-bağlayıcısı
+ ```
+ 
+ 
+@@ -24,31 +25,8 @@ pip binance-futures-connector'ı kurun
+ 
+ Kullanım örnekleri:
+ ```piton
+-
+-binance.cm_futures'dan CMFutures'ı içe aktarın
+-
+-cm_futures_client = CMFutures()
+-
+-# sunucu saatini al
+-print(cm_futures_client.time())
+-
+-cm_futures_client = CMFutures(anahtar='<api_anahtarı>', sır='<api_sırrı>')
+-
+-# Hesap bilgilerini al
+-print(cm_futures_client.hesap())
+-
+-# Yeni bir sipariş gönderin
+-parametreler = {
+- 'sembol': 'BTCUSDT',
+- 'yan': 'SAT',
+- 'tür': 'SINIR',
+- 'timeInForce': 'GTC',
+- 'miktar': 0,002,
+- 'fiyat': 59808
+-}
+-
+-yanıt = cm_futures_client.new_order(**params)
+-print(yanıt)
++ $ echo -n "sembol=BTCUSDT&yan=ALIŞ&tür=SINIR&miktar=1&fiyat=9000&geçerlilikzamanı=GTC&alışPenceresi=5000&zamandamgası=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
++ (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
+ ```
+ Daha fazla uç noktayı kontrol etmek için lütfen `examples` klasörünü bulun.
+ 
+@@ -56,18 +34,8 @@ Daha fazla uç noktayı kontrol etmek için lütfen `examples` klasörünü bulun.
+ Binance, HMAC ve RSA API kimlik doğrulamasını destekler.
+ 
+ ```piton
+-# HMAC Kimlik Doğrulaması
+-client = İstemci(api_anahtarı, api_sırrı)
+-print(müşteri.hesap())
+-
+-# RSA Kimlik Doğrulaması
+-anahtar = ""
+-with open("/Users/john/private_key.pem", "r") as f: # Özel anahtar dosyasının konumu
+- özel_anahtar = f.read()
+-private_key_passphrase = "" # İsteğe bağlı: yalnızca şifrelenmiş RSA anahtarı için kullanılır
+-
+-istemci = İstemci(anahtar=anahtar, özel_anahtar=özel_anahtar, özel_anahtar_şifresi=özel_anahtar_şifresi)
+-print(müşteri.hesap())
++(HMAC SHA256)
++ $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order' -d 'sembol=BTCUSDT&side=ALIŞVERİŞ&tür=SINIR&miktar=1&fiyat=9000&timeInForce=GTC&recvWindow=5000×tamp=1591702613943&imza=3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
+ ```
+ Daha fazla ayrıntı için lütfen `examples/um_futures/trade/get_account.py` veya `examples/cm_futures/trade/get_account.py` dosyalarına bakın.
+ 
+@@ -140,7 +108,14 @@ print(istemci.zaman())
+ döner:
+ 
+ ```piton
+-{'limit_usage': {'x-mbx-used-weight-1m': '1'}, 'data': {'serverTime': 1653563092778}}
++sembol=BTCUSDT
++&side=ALIŞVERİŞ
++&type=SINIR
++&ZorunluZaman=GTC
++&miktar=1
++&fiyat=9000
+++alPencere=5000
++&zaman damgası=1591702613943
+ ```
+ Hata ayıklamaya yardımcı olması için tam yanıt meta verilerini de görüntüleyebilirsiniz:
+ 
+@@ -152,7 +127,8 @@ print(istemci.zaman())
+ döner:
+ 
+ ```piton
+-{'data': {'serverTime': 1587990847650}, 'header': {'Context-Type': 'application/json;charset=utf-8', ...}}
++ $ echo -n "sembol=BTCUSDT&side=ALIŞ&tür=SINIR&ZorunluZaman=GTCmiktarı=1&fiyat=9000&alışPenceresi=5000&zamandamgası=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
++ (stdin) = f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2
+ ```
+ 
+ `ClientError` alındığında, tam yanıt meta bilgisi görüntülenir.
+@@ -175,7 +151,16 @@ Kütüphaneden 2 tip hata döndürülüyor:
+     - Bu hata sunucunun `5XX` döndürmesi durumunda ortaya çıkar, sunucu tarafında oluşan bir sorundur.
+ 
+ ## Web soketi
++eğer (zaman damgası < sunucuZamanı + 1000 && sunucuZamanı - zaman damgası <= recvWindow) {
++ // işlem isteği
++} değilse {
++ // isteği reddet
++}
++ # $ echo -n "sembol=BTCUSDT&yan=ALIŞ&tür=SINIR&miktar=1&fiyat=9000&geçerlilikzamanı=GTC&alışPenceresi=5000&zamandamgası=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
++ (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
++
+ 
++    
+ ### Bağlayıcı v4
+ 
+ WebSocket aşağıdaki bağlantılar aracılığıyla kurulabilir:
+@@ -183,20 +168,8 @@ WebSocket aşağıdaki bağlantılar aracılığıyla kurulabilir:
+ - COIN-M WebSocket Akışı (`https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Connect`)
+ 
+ ```piton
+-# WebSocket Akış İstemcisi
+-ithalat zamanı
+-binance.websocket.um_futures.websocket_client'dan UMFuturesWebsocketClient'ı içe aktarın
+-
+-def message_handler(_, mesaj):
+- logging.info(mesaj)
+-
+-my_client = UMFuturesWebsocketClient(on_message=mesaj_işleyicisi)
+-
+-# Tek bir sembol akışına abone ol
+-my_client.agg_trade(sembol="bnbusdt")
+-zaman.uyku(5)
+-logging.info("ws bağlantısı kapatılıyor")
+-benim_müşterim.durdur()
++ (HMAC SHA256)
++ $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=ALIŞVERİŞ&type=LIMIT&timeInForce=GTC' -d 'miktar=1&fiyat=9000&recvWindow=5000×tamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
+ ```
+ 
+ #### İstek Kimliği
+@@ -204,11 +177,16 @@ my_client.stop()
+ İstemci her isteğe bir istek kimliği atayabilir. İstek kimliği yanıt mesajında ​​döndürülecektir. Kütüphanede zorunlu değildir, sağlanmazsa bir uuid biçim dizesi üretir.
+ 
+ ```piton
+-# istemci tarafından sağlanan kimlik
+-my_client.agg_trade(sembol="bnbusdt", id="benim_istek_kimliğim")
++queryString: sembol=BTCUSDT&side=SATIN AL&type=LIMIT&timeInForce=GTC
++requestBody: miktar=1&fiyat=9000&alPencere=5000&zaman damgası= 1591702613943
++Örnek 3'te imzanın farklı olduğuna dikkat edin.
++"GTC" ile "miktar=1" arasında & yok.
+ 
+-# kütüphane rastgele bir uuid dizesi üretecektir
+-my_client.agg_trade(sembol="bnbusdt")
++POST /fapi/v1/order için İMZALANMIŞ Uç Nokta Örnekleri - RSA
++Bu, geçerli bir imzalı yük devam etmek için imzanın nasıl oluşturulacağına dair adım adım bir işlem olacaktır.
++Şu anda taşıdığınız PKCS#8.
++API anahtarınızı alabilmeniz için RSA Genel Anahtarınızı yüklemeniz gerekmektedir; buna karşılık gelen API anahtarı boyutu kaydedilir.
++Bu örnek için özel anahtar şu şekilde referans alınacaktır:test-prv-key.pem
+ ```
+ #### Vekil
+ 
+@@ -229,26 +207,11 @@ proxy'ler = { 'http': 'http://1.2.3.4:8080' }
+ Ayrıca proxy URL'sine `kullanıcı adı` ve `şifre` parametrelerini ekleyerek proxy için kimlik doğrulamayı da kullanabilirsiniz:
+ 
+ ```piton
+-proxies = { 'http': 'http://kullanıcı adı:şifre@host:port' }
++timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SATIŞ&type=PAZAR&miktar=1.23
+ ```
+ 
+ ```piton
+-# WebSocket Akış İstemcisi
+-ithalat zamanı
+-binance.websocket.um_futures.websocket_client'dan UMFuturesWebsocketClient'ı içe aktarın
+-
+-proxy'ler = {'http': 'http://1.2.3.4:8080'}
+-
+-def message_handler(_, mesaj):
+- logging.info(mesaj)
+-
+-my_client = UMFuturesWebsocketClient(on_message=mesaj_işleyicisi, vekiller=vekiller)
+-
+-# Tek bir sembol akışına abone ol
+-my_client.agg_trade(sembol="bnbusdt")
+-zaman.uyku(5)
+-logging.info("ws bağlantısı kapatılıyor")
+-benim_müşterim.durdur()
++ $ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SATIŞ&type=PAZAR&miktar=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
+ ```
+ 
+ 
+@@ -261,20 +224,8 @@ Daha fazla websocket örneği `examples` klasöründe mevcuttur
+ ## Websocket < v4
+ 
+ ```piton
+-ithalat zamanı
+-binance.websocket.um_futures.websocket_client'dan UMFuturesWebsocketClient'ı içe aktarın
+-
+-def message_handler(mesaj):
+- print(mesaj)
+-
+-my_client = UMFuturesWebsocketClient(on_message=mesaj_işleyicisi)
+-
+-# Tek bir sembol akışına abone ol
+-my_client.agg_trade(sembol="bnbusdt")
+-zaman.uyku(5)
+-print("ws bağlantısı kapatılıyor")
+-benim_müşterim.durdur()
+-
++$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SATIŞ&type=PAZAR&miktar=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64
++aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4 A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+ ```
+ 
+ ### Kalp atışı
