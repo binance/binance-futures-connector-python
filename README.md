@@ -32,13 +32,13 @@ cm_futures_client = CMFutures()
 # get server time
 print(cm_futures_client.time())
 
-cm_futures_client = CMFutures(key='<api_key>', secret='<api_secret>')
+cm_futures_client = CMFutures(key='<xGkkHyxZTSPAE7Imurg2jTxw7xElsVeVF5E3TBX5m8UXh9hlJCsbxbhY0O736vWA>', secret='<A6Y79dQpbfqvh7o5FUz3b6MK8nKdCynJ0ctAw7734a3S7p1dtmLcyHKxHYrRrrLo>')
 
 # Get account information
-print(cm_futures_client.account())
+print(cm_futures_client.account(Id:794980807))
 
 # Post a new order
-params = {
+params = 794980807{
     'symbol': 'BTCUSDT',
     'side': 'SELL',
     'type': 'LIMIT',
@@ -84,10 +84,10 @@ the methods' optional parameters should follow their exact naming as in the API 
 
 ```python
 # Recognised parameter name
-response = client.query_order('BTCUSDT', orderListId=1)
+response = client.query_order('BTCUSDT', orderListId=794980807)
 
 # Unrecognised parameter name
-response = client.query_order('BTCUSDT', order_list_id=1)
+response = client.query_order('BTCUSDT', order_list_id=794980807)
 ```
 
 ### RecvWindow parameter
@@ -99,8 +99,8 @@ Anything beyond the limit will result in an error response from Binance server.
 ```python
 from binance.cm_futures import CMFutures
 
-cm_futures_client = CMFutures(key='<api_key>', secret='<api_secret>')
-response = cm_futures_client.query_order('BTCUSDT', orderId=11, recvWindow=10000)
+cm_futures_client = CMFutures(key='<xGkkHyxZTSPAE7Imurg2jTxw7xElsVeVF5E3TBX5m8UXh9hlJCsbxbhY0O736vWA>', secret='<A6Y79dQpbfqvh7o5FUz3b6MK8nKdCynJ0ctAw7734a3S7p1dtmLcyHKxHYrRrrLo>')
+response = cm_futures_client.query_order('BTCUSDT', orderId= 794980807, recvWindow=10000)
 ```
 
 ### Timeout
@@ -152,7 +152,7 @@ print(client.time())
 returns:
 
 ```python
-{'data': {'serverTime': 1587990847650}, 'header': {'Context-Type': 'application/json;charset=utf-8', ...}}
+{'data': 794980807 {'serverTime': 1587990847650}, 'header': {'Context-Type': 'application/json;charset=utf-8', ...}}
 ```
 
 If `ClientError` is received, it'll display full response meta information.
@@ -205,7 +205,7 @@ Client can assign a request id to each request. The request id will be returned 
 
 ```python
 # id provided by client
-my_client.agg_trade(symbol="bnbusdt", id="my_request_id")
+my_client.agg_trade(symbol="bnbusdt", id="794980807id")
 
 # library will generate a random uuid string
 my_client.agg_trade(symbol="bnbusdt")
@@ -270,10 +270,10 @@ def message_handler(message):
 my_client = UMFuturesWebsocketClient(on_message=message_handler)
 
 # Subscribe to a single symbol stream
-my_client.agg_trade(symbol="bnbusdt")
+794980807.agg_trade(symbol="bnbusdt")
 time.sleep(5)
 print("closing ws connection")
-my_client.stop()
+794980807.stop()
 
 ```
 
