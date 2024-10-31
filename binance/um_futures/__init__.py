@@ -21,9 +21,11 @@ class UMFutures(API):
     from binance.um_futures.market import mark_price_klines
     from binance.um_futures.market import mark_price
     from binance.um_futures.market import funding_rate
+    from binance.um_futures.market import funding_info
     from binance.um_futures.market import ticker_24hr_price_change
     from binance.um_futures.market import ticker_price
     from binance.um_futures.market import book_ticker
+    from binance.um_futures.market import quarterly_contract_settlement_price
     from binance.um_futures.market import open_interest
     from binance.um_futures.market import open_interest_hist
     from binance.um_futures.market import top_long_short_position_ratio
@@ -33,6 +35,7 @@ class UMFutures(API):
     from binance.um_futures.market import blvt_kline
     from binance.um_futures.market import index_info
     from binance.um_futures.market import asset_Index
+    from binance.um_futures.market import index_price_constituents
 
     # ACCOUNT(including orders and trades)
     from binance.um_futures.account import change_position_mode
@@ -65,8 +68,23 @@ class UMFutures(API):
     from binance.um_futures.account import force_orders
     from binance.um_futures.account import api_trading_status
     from binance.um_futures.account import commission_rate
+    from binance.um_futures.account import futures_account_configuration
+    from binance.um_futures.account import symbol_configuration
+    from binance.um_futures.account import query_user_rate_limit
     from binance.um_futures.account import download_transactions_asyn
     from binance.um_futures.account import aysnc_download_info
+    from binance.um_futures.account import download_order_asyn
+    from binance.um_futures.account import async_download_order_id
+    from binance.um_futures.account import download_trade_asyn
+    from binance.um_futures.account import async_download_trade_id
+    from binance.um_futures.account import toggle_bnb_burn
+    from binance.um_futures.account import get_bnb_burn
+
+    # CONVERT
+    from binance.um_futures.convert import list_all_convert_pairs
+    from binance.um_futures.convert import send_quote_request
+    from binance.um_futures.convert import accept_offered_quote
+    from binance.um_futures.convert import order_status
 
     # STREAMS
     from binance.um_futures.data_stream import new_listen_key

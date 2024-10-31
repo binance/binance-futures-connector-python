@@ -352,6 +352,23 @@ def book_ticker(self, symbol: str = None, pair: str = None):
     return self.query("/dapi/v1/ticker/bookTicker", params)
 
 
+def query_index_price_constituents(self, symbol: str):
+    """
+    |
+    | **Query Index Price Constituents**
+
+    :API endpoint: ``GET /dapi/v1/constituents``
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/Index-Constituents
+
+    :parameter symbol: string; symbol underlying e.g BTCUSD
+    |
+    """
+
+    check_required_parameter(symbol, "symbol")
+    params = {"symbol": symbol}
+    return self.query("/dapi/v1/constituents", params)
+
+
 def open_interest(self, symbol: str):
     """
     |

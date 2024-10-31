@@ -62,6 +62,22 @@ class UMFuturesWebsocketClient(BinanceWebsocketClient):
 
         self.send_message_to_server(stream_name, action=action, id=id)
 
+    def mark_price_all_market(self, speed=1, id=None, action=None, **kwargs):
+        """Mark Price Stream for All market
+
+        Stream Name: !markPrice@arr OR !markPrice@arr@1s
+
+        https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market
+
+        Update Speed: 3000ms or 1000ms
+        """
+        if speed == 1:
+            stream_name = "!markPrice@arr@{}s".format(speed)
+        else:
+            stream_name = "!markPrice@arr"
+
+        self.send_message_to_server(stream_name, action=action, id=id)
+
     def kline(self, symbol: str, interval: str, id=None, action=None, **kwargs):
         """Kline/Candlestick Streams
 
@@ -150,7 +166,7 @@ class UMFuturesWebsocketClient(BinanceWebsocketClient):
         Stream Name: !miniTicker@arr
 
         https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream
-        https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams
+        https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream
 
         Update Speed: 500ms for individual symbol, 1000ms for all market symbols
         """

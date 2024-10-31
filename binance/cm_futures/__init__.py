@@ -24,6 +24,7 @@ class CMFutures(API):
     from binance.cm_futures.market import ticker_24hr_price_change
     from binance.cm_futures.market import ticker_price
     from binance.cm_futures.market import book_ticker
+    from binance.cm_futures.market import query_index_price_constituents
     from binance.cm_futures.market import open_interest
     from binance.cm_futures.market import open_interest_hist
     from binance.cm_futures.market import top_long_short_account_ratio
@@ -57,6 +58,7 @@ class CMFutures(API):
     from binance.cm_futures.account import get_position_risk
     from binance.cm_futures.account import get_account_trades
     from binance.cm_futures.account import get_income_history
+    from binance.cm_futures.account import get_download_id_transaction_history
     from binance.cm_futures.account import leverage_brackets
     from binance.cm_futures.account import adl_quantile
     from binance.cm_futures.account import force_orders
@@ -66,6 +68,3 @@ class CMFutures(API):
     from binance.cm_futures.data_stream import new_listen_key
     from binance.cm_futures.data_stream import renew_listen_key
     from binance.cm_futures.data_stream import close_listen_key
-
-    # PORTFOLIO MARGIN
-    from binance.cm_futures.portfolio_margin import pm_exchange_info

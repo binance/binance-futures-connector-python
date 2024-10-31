@@ -53,7 +53,7 @@ def depth(self, symbol: str, **kwargs):
     | **Get Orderbook**
 
     :API endpoint: ``GET /fapi/v1/depth``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Order-Book
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book
 
     :parameter symbol: string; the trading symbol.
     :parameter limit: optional int; limit the results. Default 500, valid limits: [5, 10, 20, 50, 100, 500, 1000].
@@ -263,6 +263,20 @@ def funding_rate(self, symbol: str, **kwargs):
     return self.query("/fapi/v1/fundingRate", params)
 
 
+def funding_info(self):
+    """
+    |
+    | **Get Funding Rate Info**
+    | *Query funding rate info for symbols that had FundingRateCap/FundingRateFloor/fundingIntervalHours adjustment*
+
+    :API endpoint: ``GET /fapi/v1/fundingInfo``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Info
+    |
+    """
+
+    return self.query("/fapi/v1/fundingRate")
+
+
 def ticker_24hr_price_change(self, symbol: str = None):
     """
     |
@@ -286,10 +300,11 @@ def ticker_24hr_price_change(self, symbol: str = None):
 def ticker_price(self, symbol: str = None):
     """
     |
-    | **Latest price for a symbol or symbols.**
+    | **Symbol Price Ticker V2**
+    | *If the symbol is not sent, prices for all symbols will be returned in an array.*
 
-    :API endpoint: ``GET /fapi/v1/ticker/price``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker
+    :API endpoint: ``GET /fapi/v2/ticker/price``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2
 
     :parameter symbol: optional string; the trading symbol.
 
@@ -301,7 +316,7 @@ def ticker_price(self, symbol: str = None):
     params = {
         "symbol": symbol,
     }
-    return self.query("/fapi/v1/ticker/price", params)
+    return self.query("/fapi/v2/ticker/price", params)
 
 
 def book_ticker(self, symbol: str = None):
@@ -310,7 +325,7 @@ def book_ticker(self, symbol: str = None):
     | **Best price/qty on the order book for a symbol or symbols.**
 
     :API endpoint: ``GET /fapi/v1/ticker/bookTicker``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker
 
     :parameter symbol: optional string; the trading symbol.
 
@@ -323,6 +338,24 @@ def book_ticker(self, symbol: str = None):
         "symbol": symbol,
     }
     return self.query("/fapi/v1/ticker/bookTicker", params)
+
+
+def quarterly_contract_settlement_price(self, pair: str):
+    """
+    |
+    | **Quarterly Contract Settlement Price**
+    | *Latest price for a symbol or symbols.*
+
+    :API endpoint: ``GET /futures/data/delivery-price``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price
+
+    :parameter pair: string; the trading pair.
+    |
+    """
+
+    check_required_parameter(pair, "pair")
+    params = {"pair": pair}
+    return self.query("/futures/data/delivery-price", params)
 
 
 def open_interest(self, symbol: str):
@@ -518,7 +551,7 @@ def asset_Index(self, symbol: str = None):
     | **Get asset index for Multi-Assets mode**
 
     :API endpoint: ``GET /fapi/v1/assetIndex``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index
 
     :parameter symbol: optional string; Asset pair in multi asset mode (ex: BTCUSD).
     |
@@ -528,3 +561,22 @@ def asset_Index(self, symbol: str = None):
         "symbol": symbol,
     }
     return self.query("/fapi/v1/assetIndex", params)
+
+
+def index_price_constituents(self, symbol: str = None):
+    """
+    |
+    | **Query Index Price Constituents**
+    | *Query index price constituents*
+
+    :API endpoint: ``GET /fapi/v1/constituents``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents
+
+    :parameter symbol: string; the trading symbol.
+    |
+    """
+
+    params = {
+        "symbol": symbol,
+    }
+    return self.query("/fapi/v1/constituents", params)
