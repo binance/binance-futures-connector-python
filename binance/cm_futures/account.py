@@ -64,7 +64,9 @@ def new_order(self, symbol: str, side: str, type: str, **kwargs):
     :parameter callbackRate: optional float. Use with TRAILING_STOP_MARKET orders, min 0.1, max 5 where 1 for 1%.
     :parameter workingType: optional string. stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE".
     :parameter priceProtect: optional string. "TRUE" or "FALSE", default "FALSE". Use with STOP/STOP_MARKET or TAKE_PROFIT/TAKE_PROFIT_MARKET orders.
-    :parameter newOrderRespType: optional float. "ACK" or "RESULT", default "ACK".
+    :parameter newOrderRespType: optional string. "ACK" or "RESULT", default "ACK".
+    :parameter priceMatch: optional string. only avaliable for "LIMIT"/"STOP"/"TAKE_PROFIT" order; can be set to "OPPONENT"/"OPPONENT_5"/"OPPONENT_10"/"OPPONENT_20": /"QUEUE"/"QUEUE_5"/"QUEUE_10"/"QUEUE_20"; Can't be passed together with price.
+    :parameter selfTradePreventionMode: optional string. "NONE":No STP /"EXPIRE_TAKER":expire taker order when STP triggers/"EXPIRE_MAKER":expire taker order when STP triggers/"EXPIRE_BOTH":expire both orders when STP triggers; default "NONE".
     :parameter recvWindow: optional int
     |
     """
@@ -88,7 +90,7 @@ def modify_order(
     | **Modify Order (TRADE)**
     | *Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue.*
 
-    :API endpoint: ``POST /dapi/v1/order``
+    :API endpoint: ``PUT /dapi/v1/order``
     :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/Modify-Order
 
     :parameter symbol: string
@@ -673,6 +675,7 @@ def get_income_history(self, **kwargs):
     :parameter incomeType: optional string; "TRANSFER", "WELCOME_BONUS", "REALIZED_PNL", "FUNDING_FEE", "COMMISSION" and "INSURANCE_CLEAR"
     :parameter startTime: optional string; timestamp in ms to get funding from INCLUSIVE.
     :parameter endTime: optional string; timestamp in ms to get funding from INCLUSIVE.
+    :parameter page: optional int
     :parameter limit: optional int; default 50, max 100
     :parameter recvWindow: optional int
 
@@ -684,6 +687,31 @@ def get_income_history(self, **kwargs):
 
     url_path = "/dapi/v1/income"
     params = {**kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def get_download_id_transaction_history(self, startTime: int, endTime: int, **kwargs):
+    """
+    |
+    | **Get Download Id For Futures Transaction History (USER_DATA)**
+    | *Get download ID transaction history.*
+    | *Request Limitation is 5 times per month, shared by front end download page and rest api*
+    | *The time between startTime and endTime can not be longer than 1 year*
+
+    :API endpoint: ``GET /dapi/v1/income/asyn``
+    :API doc: https://developers.binance.com/docs/derivatives/coin-margined-futures/account/Get-Download-Id-For-Futures-Transaction-History
+
+    :parameter startTime: int
+    :parameter endTime: int
+    :parameter recvWindow: optional int
+    |
+    """
+
+    check_required_parameter(startTime, "startTime")
+    check_required_parameter(endTime, "endTime")
+    url_path = "/dapi/v1/income/asyn"
+    params = {"startTime": startTime, "endTime": endTime, **kwargs}
 
     return self.sign_request("GET", url_path, params)
 

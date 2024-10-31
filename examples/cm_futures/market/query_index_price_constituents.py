@@ -6,5 +6,4 @@ from binance.lib.utils import config_logging
 config_logging(logging, logging.DEBUG)
 
 cm_futures_client = CMFutures()
-
-logging.info(cm_futures_client.pm_exchange_info())
+logging.info(cm_futures_client.query_index_price_constituents(symbol="BTCUSD"))

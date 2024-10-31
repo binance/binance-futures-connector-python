@@ -1,5 +1,51 @@
 # Changelog
 
+## 4.1.0 - 2024-10-31
+
+### Added
+- UM_Futures:
+  - `GET /fapi/v1/fundingInfo`
+  - `GET /futures/data/delivery-price`
+  - `GET /fapi/v1/constituents`
+  - `GET /fapi/v1/accountConfig`
+  - `GET /fapi/v1/symbolConfig`
+  - `GET /fapi/v1/rateLimit/order`
+  - `GET /fapi/v1/order/asyn`
+  - `GET /fapi/v1/order/asyn/id`
+  - `GET /fapi/v1/trade/asyn`
+  - `GET /fapi/v1/trade/asyn/id`
+  - `POST /fapi/v1/feeBurn`
+  - `GET /fapi/v1/feeBurn`
+  - `GET /fapi/v1/convert/exchangeInfo`
+  - `POST /fapi/v1/convert/getQuote`
+  - `POST /fapi/v1/convert/acceptQuote`
+  - `GET /fapi/v1/convert/orderStatus`
+  - Websocket Stream `mark_price_all_market`
+
+- CM_Futures:
+  - `GET /dapi/v1/income/asyn`
+  - `GET /dapi/v1/constituents`
+
+### Changed
+- UM_Futures:
+  - `GET /fapi/v1/income`: Add parameter `page` for pagination
+  - `POST /fapi/v1/order`: Add parameters `selfTradePreventionMode`, `priceMatch` and `goodTillDate`
+  - `POST /fapi/v1/batchOrders`: Add parameters `priceMatch`, `selfTradePreventionMode` and `goodTillDate`
+  - `GET /fapi/v1/ticker/price`: deprecated, replaced by `GET /fapi/v2/ticker/price`
+  - `GET /fapi/v2/balance`: deprecated, replaced by `GET /fapi/v3/balance`
+  - `GET /fapi/v2/account`: deprecated, replaced by `GET /fapi/v3/account`
+  - `GET /fapi/v2/positionRisk`: deprecated, replaced by `GET /fapi/v3/positionRisk`
+
+- CM_Futures:
+  - `GET /dapi/v1/income`: Add parameter `page` for pagination
+  - `POST /dapi/v1/order`: Add parameters `priceMatch` and `selfTradePreventionMode`
+
+- Update Websocket connection exceptions: Add `_handle_exception` method to handle exceptions
+
+### Removed
+- CM_Futures:
+  - `/dapi/v1/pmExchangeInfo`
+
 ## 4.0.1 - 2024-10-03
 
 ### Removed

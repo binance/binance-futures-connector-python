@@ -85,7 +85,7 @@ def new_order(self, symbol: str, side: str, type: str, **kwargs):
     | *Send a new order*
 
     :API endpoint: ``POST /fapi/v1/order``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Order
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api
 
     :parameter symbol: string
     :parameter side: string
@@ -102,7 +102,10 @@ def new_order(self, symbol: str, side: str, type: str, **kwargs):
     :parameter callbackRate: optional float. Use with TRAILING_STOP_MARKET orders, min 0.1, max 5 where 1 for 1%.
     :parameter workingType: optional string. stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE".
     :parameter priceProtect: optional string. "TRUE" or "FALSE", default "FALSE". Use with STOP/STOP_MARKET or TAKE_PROFIT/TAKE_PROFIT_MARKET orders.
-    :parameter newOrderRespType: optional float. "ACK" or "RESULT", default "ACK".
+    :parameter newOrderRespType: optional string. "ACK" or "RESULT", default "ACK".
+    :parameter priceMatch: optional string. only avaliable for "LIMIT"/"STOP"/"TAKE_PROFIT" order; can be set to "OPPONENT"/"OPPONENT_5"/"OPPONENT_10"/"OPPONENT_20": /"QUEUE"/"QUEUE_5"/"QUEUE_10"/"QUEUE_20"; Can't be passed together with price.
+    :parameter selfTradePreventionMode: optional string. "NONE":No STP /"EXPIRE_TAKER":expire taker order when STP triggers/"EXPIRE_MAKER":expire taker order when STP triggers/"EXPIRE_BOTH":expire both orders when STP triggers; default "NONE".
+    :parameter goodTillDate: optional int. order cancel time for timeInForce "GTD", mandatory when timeInforce set to "GTD"; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000.
     :parameter recvWindow: optional int
     |
     """
@@ -120,7 +123,7 @@ def new_order_test(self, symbol: str, side: str, type: str, **kwargs):
     | *Send a new test order*
 
     :API endpoint: ``POST /fapi/v1/order/test``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Order
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test
 
     :parameter symbol: string
     :parameter side: string
@@ -164,7 +167,7 @@ def modify_order(
     | *Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue*
 
     :API endpoint: ``PUT /fapi/v1/order``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order
 
     :parameter symbol: string
     :parameter side: string
@@ -236,7 +239,10 @@ def new_batch_order(self, batchOrders: list):
     :parameter callbackRate: optional float. Use with TRAILING_STOP_MARKET orders, min 0.1, max 5 where 1 for 1%.
     :parameter workingType: optional string. stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE".
     :parameter priceProtect: optional string. "TRUE" or "FALSE", default "FALSE". Use with STOP/STOP_MARKET or TAKE_PROFIT/TAKE_PROFIT_MARKET orders.
-    :parameter newOrderRespType: optional float. "ACK" or "RESULT", default "ACK".
+    :parameter newOrderRespType: optional string. "ACK" or "RESULT", default "ACK".
+    :parameter priceMatch: optional string. only avaliable for "LIMIT"/"STOP"/"TAKE_PROFIT" order; can be set to "OPPONENT"/"OPPONENT_5"/"OPPONENT_10"/"OPPONENT_20": /"QUEUE"/"QUEUE_5"/"QUEUE_10"/"QUEUE_20"; Can't be passed together with price.
+    :parameter selfTradePreventionMode: optional string. "NONE":No STP /"EXPIRE_TAKER":expire taker order when STP triggers/"EXPIRE_MAKER":expire taker order when STP triggers/"EXPIRE_BOTH":expire both orders when STP triggers; default "NONE".
+    :parameter goodTillDate: optional int. order cancel time for timeInForce "GTD", mandatory when timeInforce set to "GTD"; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000.
     :parameter recvWindow: optional int
     |
 
@@ -286,7 +292,7 @@ def query_order(
     | *Check an order's status*
 
     :API endpoint: ``GET /fapi/v1/order``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -321,7 +327,7 @@ def cancel_order(
     | *Cancel an active order.*
 
     :API endpoint: ``DELETE /fapi/v1/order``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order
 
     :parameter symbol: string
     :parameter orderId: optional int
@@ -537,31 +543,31 @@ def balance(self, **kwargs):
     | **Futures Account Balance V2 (USER_DATA)**
     | *Get current account balance*
 
-    :API endpoint: ``GET /fapi/v2/balance``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2
+    :API endpoint: ``GET /fapi/v3/balance``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3
 
     :parameter recvWindow: optional int
     |
     """
 
-    url_path = "/fapi/v2/balance"
+    url_path = "/fapi/v3/balance"
     return self.sign_request("GET", url_path, {**kwargs})
 
 
 def account(self, **kwargs):
     """
     |
-    | **Account Information V2 (USER_DATA)**
+    | **Account Information V3(USER_DATA)**
     | *Get current account information*
 
-    :API endpoint: ``GET /fapi/v2/account``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2
+    :API endpoint: ``GET /fapi/v3/account``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3
 
     :parameter recvWindow: optional int
     |
     """
 
-    url_path = "/fapi/v2/account"
+    url_path = "/fapi/v3/account"
     return self.sign_request("GET", url_path, {**kwargs})
 
 
@@ -663,15 +669,15 @@ def get_position_risk(self, **kwargs):
     | **Position Information V2 (USER_DATA)**
     | *Get current position information.*
 
-    :API endpoint: ``GET /fapi/v2/positionRisk``
-    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Information
+    :API endpoint: ``GET /fapi/v3/positionRisk``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3
 
     :parameter symbol: string
     :parameter recvWindow: optional int
     |
     """
 
-    url_path = "/fapi/v2/positionRisk"
+    url_path = "/fapi/v3/positionRisk"
     params = {**kwargs}
 
     return self.sign_request("GET", url_path, params)
@@ -720,6 +726,7 @@ def get_income_history(self, **kwargs):
     :parameter incomeType: optional string; "TRANSFER", "WELCOME_BONUS", "REALIZED_PNL", "FUNDING_FEE", "COMMISSION" and "INSURANCE_CLEAR".
     :parameter startTime: optional int; timestamp in ms to get funding from INCLUSIVE.
     :parameter endTime: optional int; timestamp in ms to get funding from INCLUSIVE.
+    :parameter page: optional int
     :parameter limit: optional int; default: 100, max: 1000.
     :parameter recvWindow: optional int
 
@@ -850,6 +857,59 @@ def commission_rate(self, symbol: str, **kwargs):
     return self.sign_request("GET", url_path, params)
 
 
+def futures_account_configuration(self, **kwargs):
+    """
+    |
+    | **Futures Account Configuration(USER_DATA)**
+
+    :API endpoint: ``GET /fapi/v1/accountConfig``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config
+
+    :parameter recvWindow: optional int
+    |
+    """
+    url_path = "/fapi/v1/accountConfig"
+    params = {**kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def symbol_configuration(self, **kwargs):
+    """
+    |
+    | **Symbol Configuration(USER_DATA)**
+    | *Get current account symbol configuration.*
+
+    :API endpoint: ``GET /fapi/v1/symbolConfig``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config
+
+    :parameter symbol: optional string
+    :parameter recvWindow: optional int
+    |
+    """
+    url_path = "/fapi/v1/symbolConfig"
+    params = {**kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def query_user_rate_limit(self, **kwargs):
+    """
+    |
+    | **Query User Rate Limit (USER_DATA)**
+
+    :API endpoint: ``GET /fapi/v1/rateLimit/order``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit
+
+    :parameter recvWindow: optional int
+    |
+    """
+    url_path = "/fapi/v1/rateLimit/order"
+    params = {**kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
 def download_transactions_asyn(self, startTime: int, endTime: int, **kwargs):
     """
     |
@@ -888,5 +948,134 @@ def aysnc_download_info(self, downloadId: str, **kwargs):
     check_required_parameter(downloadId, "downloadId")
     url_path = "/fapi/v1/income/asyn/id"
     params = {"downloadId": downloadId, **kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def download_order_asyn(self, startTime: int, endTime: int, **kwargs):
+    """
+    |
+    | **Get Download Id For Futures Order History (USER_DATA)**
+    | *Request Limitation is 10 times per month, shared by front end download page and rest api*
+    | *The time between startTime and endTime can not be longer than 1 year*
+
+    :API endpoint: ``GET /fapi/v1/order/asyn``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History
+
+    :parameter startTime:  int
+    :parameter endTime:  int
+    :parameter recvWindow: optional int
+    |
+    """
+
+    check_required_parameter(startTime, "startTime")
+    check_required_parameter(endTime, "endTime")
+    url_path = "/fapi/v1/order/asyn"
+    params = {"startTime": startTime, "endTime": endTime, **kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def async_download_order_id(self, downloadId: str, **kwargs):
+    """
+    |
+    | **Get Futures Order History Download Link by Id (USER_DATA)**
+    | *Download link expiration: 24h*
+
+    :API endpoint: ``GET /fapi/v1/order/asyn/id``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id
+
+    :parameter downloadId:  string
+    :parameter recvWindow: optional int
+    |
+    """
+
+    check_required_parameter(downloadId, "downloadId")
+    url_path = "/fapi/v1/order/asyn/id"
+    params = {"downloadId": downloadId, **kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def download_trade_asyn(self, startTime: int, endTime: int, **kwargs):
+    """
+    |
+    | **Get Download Id For Futures Trade History (USER_DATA)**
+    | *Request Limitation is 5 times per month, shared by front end download page and rest api*
+    | *The time between startTime and endTime can not be longer than 1 year*
+
+    :API endpoint: ``GET /fapi/v1/trade/asyn``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History
+
+    :parameter startTime:  int
+    :parameter endTime:  int
+    :parameter recvWindow: optional int
+    |
+    """
+
+    check_required_parameter(startTime, "startTime")
+    check_required_parameter(endTime, "endTime")
+    url_path = "/fapi/v1/trade/asyn"
+    params = {"startTime": startTime, "endTime": endTime, **kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def async_download_trade_id(self, downloadId: str, **kwargs):
+    """
+    |
+    | **Get Futures Trade Download Link by Id(USER_DATA)**
+    | *Download link expiration: 24h*
+
+    :API endpoint: ``GET /fapi/v1/trade/asyn/id``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id
+
+    :parameter downloadId:  string
+    :parameter recvWindow: optional int
+    |
+    """
+
+    check_required_parameter(downloadId, "downloadId")
+    url_path = "/fapi/v1/trade/asyn/id"
+    params = {"downloadId": downloadId, **kwargs}
+
+    return self.sign_request("GET", url_path, params)
+
+
+def toggle_bnb_burn(self, feeBurn: str, **kwargs):
+    """
+    |
+    | **Toggle BNB Burn On Futures Trade (TRADE)**
+    | *Change user's BNB Fee Discount (Fee Discount On or Fee Discount Off ) on EVERY symbol*
+
+    :API endpoint: ``POST /fapi/v1/feeBurn``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade
+
+    :parameter feeBurn: string; "true": Fee Discount On; "false": Fee Discount Off
+    :parameter recvWindow: optional int
+    |
+    """
+
+    check_required_parameter(feeBurn, "feeBurn")
+    url_path = "/fapi/v1/feeBurn"
+    params = {"feeBurn": feeBurn, **kwargs}
+
+    return self.sign_request("POST", url_path, params)
+
+
+def get_bnb_burn(self, **kwargs):
+    """
+    |
+    | **Get BNB Burn Status (USER_DATA)**
+
+    :API endpoint: ``GET /fapi/v1/feeBurn``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status
+
+    :parameter recvWindow: optional int
+    |
+    """
+
+    url_path = "/fapi/v1/feeBurn"
+    params = {**kwargs}
 
     return self.sign_request("GET", url_path, params)
