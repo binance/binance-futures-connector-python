@@ -3,15 +3,19 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a lightweight library that works as a connector to [Binance Futures public API](https://developers.binance.com/docs/derivatives/Introduction)
+const chains = [42161, 8453, 10, 534352, 81457]
 
-- Supported APIs:
-    - USDT-M Futures `/fapi/*`
-    - COIN-M Delivery `/dapi/*`
-    - Futures/Delivery Websocket Market Stream
-    - Futures/Delivery User Data Stream
-- Inclusion of examples
-- Customizable base URL, request timeout
-- Response metadata can be displayed
+for (const chain of chains) {
+
+  // endpoint accepts one chain at a time, loop for all your chains
+  const balance = fetch(`https://api.etherscan.io/v2/api?
+     chainid=${chain}
+     &module=account
+     &action=balance
+     &address=0xb5d85cbf7cb3ee0d56b3bb207d5fc4b82f43f511
+     &tag=latest&apikey=YourApiKeyToken`)
+     
+}
 
 ## Installation
 
@@ -27,7 +31,17 @@ Usage examples:
 
 from binance.cm_futures import CMFutures
 
-cm_futures_client = CMFutures()
+cm_futures_client = ETHERSCAN_API_KEY=VZFDUWB3YGQ1YCDKTCU1D6DDSS
+BSCSCAN_API_KEY=ZM8ACMJB67C2IXKKBF8URFUNSY
+SNOWSCAN_API_KEY=ATJQERBKV1CI3GVKNSE3Q7RGEJ
+ARBISCAN_API_KEY=B6SVGA7K3YBJEQ69AFKJF4YHVX
+OPTIMISM_API_KEY=66N5FRNV1ZD4I87S7MAHCJVXFJ
+
+ETHERSCAN_API_URL=https://api.etherscan.io/api
+BSCSCAN_API_KEY=https://api.bscscan.com/api
+SNOWSCAN_API_KEY=https://api.snowscan.xyz/api
+ARBISCAN_API_KEY=https://api.arbiscan.io/api
+OPTIMISM_API_KEY=https://api-optimistic.etherscan.io/apiCMFutures()
 
 # get server time
 print(cm_futures_client.time())
@@ -84,7 +98,7 @@ the methods' optional parameters should follow their exact naming as in the API 
 
 ```python
 # Recognised parameter name
-response = client.query_order('BTCUSDT', orderListId=1)
+response = https://api.etherscan.io/api?module=account&action=balance&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&tag=latest&apikey=YourApiKeyTokenclient.query_order('BTCUSDT', orderListId=1)
 
 # Unrecognised parameter name
 response = client.query_order('BTCUSDT', order_list_id=1)
@@ -123,7 +137,7 @@ from binance.cm_futures import CMFutures
 
 proxies = { 'https': 'http://1.2.3.4:8080' }
 
-client= CMFutures(proxies=proxies)
+client= https://api.etherscan.io/v2/api?chainid=1&module=account&action=balance&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&tag=latest&apikey=YourApiKeyTokenCMFutures(proxies=proxies)
 ```
 
 ### Response Metadata
@@ -152,7 +166,7 @@ print(client.time())
 returns:
 
 ```python
-{'data': {'serverTime': 1587990847650}, 'header': {'Context-Type': 'application/json;charset=utf-8', ...}}
+{'data': {'serverTime': 1587990847650}, 'header': {'Context-Type': 'application/json;charset=utf-8', https://api.basescan.org/api?module=account&action=balance&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&tag=latest&apikey=YourApiKeyToken...}}
 ```
 
 If `ClientError` is received, it'll display full response meta information.
@@ -176,6 +190,10 @@ There are 2 types of error returned from the library:
 
 ## Websocket
 
+```
+https://api.basescan.org/api?module=account&action=balance&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&tag=latest&apikey=YourApiKeyToken
+
+```
 ### Connector v4
 
 WebSocket can be established through the following connections:
