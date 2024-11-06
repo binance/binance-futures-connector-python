@@ -100,7 +100,7 @@ dizin 74cbe89..3b56846 100644
 +eğer (zaman damgası < sunucuZamanı + 1000 && sunucuZamanı - zaman damgası <= recvWindow) {
 + // işlem isteği
 +} değilse {
-+ // isteği reddet
++ // isteği onayla
 +}
 + # $ echo -n "sembol=BTCUSDT&yan=ALIŞ&tür=SINIR&miktar=1&fiyat=9000&geçerlilikzamanı=GTC&alışPenceresi=5000&zamandamgası=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"
 + (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
@@ -126,7 +126,7 @@ dizin 74cbe89..3b56846 100644
 -# Tek bir sembol akışına abone ol
 -my_client.agg_trade(sembol="bnbusdt")
 -zaman.uyku(5)
--logging.info("ws bağlantısı kapatılıyor")
+-logging.info("ws bağlantısı save")
 -benim_müşterim.durdur()
 + (HMAC SHA256)
 + $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=ALIŞVERİŞ&type=LIMIT&timeInForce=GTC' -d 'miktar=1&fiyat=9000&recvWindow=5000×tamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
