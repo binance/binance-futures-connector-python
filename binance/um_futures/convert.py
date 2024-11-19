@@ -17,7 +17,7 @@ def list_all_convert_pairs(self, **kwargs):
     |
     """
 
-    url_path = "/sapi/v1/asset/assetDividend"
+    url_path = "/fapi/v1/convert/exchangeInfo"
     params = {**kwargs}
 
     return self.sign_request("GET", url_path, params)
