@@ -199,6 +199,28 @@ def index_price_klines(self, pair: str, interval: str, **kwargs):
     return self.query("/fapi/v1/indexPriceKlines", params)
 
 
+def premium_index_klines(self, symbol: str, interval: str, **kwargs):
+    """
+    |
+    | **Kline/Candlestick Data for the premium index of a pair.**
+    | *Klines are uniquely identified by their open time.*
+
+    :API endpoint: ``GET /fapi/v1/premiumIndexKlines``
+    :API doc: https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data
+
+    :parameter symbol: string; the trading symbol.
+    :parameter interval: string; the interval of kline, e.g 1m, 5m, 1h, 1d, etc. (see more in https://developers.binance.com/docs/derivatives/usds-margined-futures/common-definition)
+    :parameter limit: optional int; limit the results. Default 500, max 1000.
+    :parameter startTime: optional int
+    :parameter endTime: optional int
+    |
+    """
+
+    check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
+    params = {"symbol": symbol, "interval": interval, **kwargs}
+    return self.query("/fapi/v1/premiumIndexKlines", params)
+
+
 def mark_price_klines(self, symbol: str, interval: str, **kwargs):
     """
     |

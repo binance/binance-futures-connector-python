@@ -18,6 +18,7 @@ class UMFutures(API):
     from binance.um_futures.market import klines
     from binance.um_futures.market import continuous_klines
     from binance.um_futures.market import index_price_klines
+    from binance.um_futures.market import premium_index_klines
     from binance.um_futures.market import mark_price_klines
     from binance.um_futures.market import mark_price
     from binance.um_futures.market import funding_rate
