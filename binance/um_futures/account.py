@@ -479,10 +479,9 @@ def get_open_orders(
         check_required_parameters(
             [
                 [symbol, "symbol"],
-                [orderId, "orderId"],
-                [origClientOrderId, "origClientOrderId"],
             ]
-        )
+        ) 
+        params = {"symbol": symbol}
     elif orderId:
         params = {"symbol": symbol, "orderId": orderId, **kwargs}
     else:
