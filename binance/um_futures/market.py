@@ -274,7 +274,7 @@ def funding_info(self):
     |
     """
 
-    return self.query("/fapi/v1/fundingRate")
+    return self.query("/fapi/v1/fundingInfo")
 
 
 def ticker_24hr_price_change(self, symbol: str = None):
